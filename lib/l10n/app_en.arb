@@ -1,0 +1,28 @@
+{
+  "@@locale": "en",
+  "shortTitle": "BBFC",
+  "@shortTitle": {
+    "description": "Main page short title.",
+    "context": "MainPage"
+  },
+  "homeTitle": "Baráti Bőrlabda FC",
+  "@homeTitle": {
+    "description": "Main page title.",
+    "context": "MainPage"
+  },
+  "userNameTag": "User name",
+  "@userNameTag": {
+    "description": "Login page user name edit text hint.",
+    "context": "MainPage"
+  },
+  "passwordTag": "Password",
+  "@passwordTag": {
+    "description": "Login page password edit text hint.",
+    "context": "MainPage"
+  },
+  "loginButton": "Login",
+  "@loginButton": {
+    "description": "Login page button title.",
+    "context": "MainPage"
+  }
+}
