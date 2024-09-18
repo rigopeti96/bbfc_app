@@ -1,0 +1,3 @@
+enum PitchSelector {
+  BBFC, ENEMY 
+}
