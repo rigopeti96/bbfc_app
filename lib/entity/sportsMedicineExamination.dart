@@ -23,7 +23,7 @@ class SportsMedicineExamination extends Event{
     return SportsMedicineExamination(
       id: json['id'] as Uuid,
       modifyDate: json['modifyDate'] as DateTime,
-      modifyUser: json['modifyUser'] as Uuid,
+      modifyUser: json['modifyUser'] as User,
       eventDate: json['eventDate'] as DateTime,
       meetingTime: json['meetingTime'] as DateTime,
       eventLocationZipCode: json['eventLocationZipCode'] as int,
