@@ -10,6 +10,11 @@
     "description": "Main page title.",
     "context": "MainPage"
   },
+  "mainMenuTitle": "Main Menu",
+  "@mainMenuTitle": {
+    "description": "Main menu page title.",
+    "context": "MainMenu"
+  },
   "userNameTag": "User name",
   "@userNameTag": {
     "description": "Login page user name edit text hint.",
@@ -24,5 +29,45 @@
   "@loginButton": {
     "description": "Login page button title.",
     "context": "MainPage"
+  },
+  "fullNameTag": "Full name",
+  "@fullNameTag": {
+    "description": "Create user page full name edit text hint.",
+    "context": "CreateUserPage"
+  },
+  "emailTag": "E-mail address",
+  "@emailTag": {
+    "description": "Create user page email edit text hint.",
+    "context": "CreateUserPage"
+  },
+  "back": "Back",
+  "@back": {
+    "description": "Button text, return to the last screen",
+    "context": "Application"
+  },
+  "profile": "Profile",
+  "@profile": {
+    "description": "Button text, navigate to profile page",
+    "context": "MainMenu"
+  },
+  "events": "Events",
+  "@events": {
+    "description": "Button text, navigate to event page",
+    "context": "MainMenu"
+  },
+  "injury": "Register injury",
+  "@injury": {
+    "description": "Button text, navigate to injury registration page",
+    "context": "MainMenu"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Button text, navigate to settings page",
+    "context": "MainMenu"
+  },
+  "injuryEstimatedUntil": "Injured period",
+  "@injuryEstimatedUntil": {
+    "description": "Label to injury date picker",
+    "context": "InjuryRegisterPage"
   }
 }

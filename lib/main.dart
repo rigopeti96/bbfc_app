@@ -1,3 +1,4 @@
+import 'package:bbfc_application/ui/mainMenu.dart';
 import 'package:flutter/material.dart';
 import 'gen_l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -31,16 +32,14 @@ class MyHomePage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void login(BuildContext context, L10n l10n) {
-
+  void _login(BuildContext context, L10n l10n) {
+    _navigateToMainMenu(context);
   }
 
-  void _showToast(BuildContext context, String message, String okButton) {
-    final scaffold = ScaffoldMessenger.of(context);
-    scaffold.showSnackBar(
-      SnackBar(
-        content: Text(message),
-        action: SnackBarAction(label: okButton, onPressed: scaffold.hideCurrentSnackBar),
+  void _navigateToMainMenu(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const MainMenu(),
       ),
     );
   }
@@ -82,7 +81,7 @@ class MyHomePage extends StatelessWidget {
               ElevatedButton(
                 child: Text(l10n.loginButton),
                 onPressed: (){
-                  login(context, l10n);
+                  _login(context, l10n);
                   //Navigator.of(context).pop();
                 },
               ),

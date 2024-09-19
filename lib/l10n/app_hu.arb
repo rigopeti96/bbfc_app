@@ -2,7 +2,15 @@
   "@@locale": "hu",
   "shortTitle": "BBFC",
   "homeTitle": "Baráti Bőrlabda FC",
+  "mainMenuTitle": "Főmenü",
   "userNameTag": "Felhasználónév",
   "passwordTag": "Jelszó",
-  "loginButton": "Bejelentkezés"
+  "loginButton": "Bejelentkezés",
+  "fullNameTag": "Teljes név",
+  "emailTag": "E-mail cím",
+  "profile": "Profil",
+  "events": "Események",
+  "injury": "Sérülés bejelentő",
+  "settings": "Beállítások",
+  "injuryEstimatedUntil": "Sérült státusz dátuma"
 }
