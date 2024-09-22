@@ -8,9 +8,12 @@
   "loginButton": "Bejelentkezés",
   "fullNameTag": "Teljes név",
   "emailTag": "E-mail cím",
+  "back": "Vissza",
   "profile": "Profil",
   "events": "Események",
   "injury": "Sérülés bejelentő",
   "settings": "Beállítások",
-  "injuryEstimatedUntil": "Sérült státusz dátuma"
+  "injuryEstimatedUntil": "Sérült státusz dátuma",
+  "errorTitle": "Hiba!",
+  "loginFieldIsEmptyExceptionMessage": "A felhasználónév és a jelszó mezó nem lehet üres!"
 }

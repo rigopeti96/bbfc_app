@@ -1,5 +1,6 @@
 import 'package:bbfc_application/ui/injuryRegister.dart';
 import 'package:bbfc_application/ui/profile.dart';
+import 'package:bbfc_application/ui/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -19,6 +20,14 @@ class MainMenu extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const InjuryRegisterPage(),
+      ),
+    );
+  }
+
+  void _navigateToSettings(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SettingsPage(),
       ),
     );
   }
@@ -53,7 +62,7 @@ class MainMenu extends StatelessWidget {
                   ElevatedButton(
                     child: Text(l10n.settings),
                     onPressed: (){
-
+                      _navigateToSettings(context);
                     },
                   ),
                 ],

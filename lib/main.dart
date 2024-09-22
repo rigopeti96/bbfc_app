@@ -1,4 +1,5 @@
 import 'package:bbfc_application/ui/mainMenu.dart';
+import 'package:bbfc_application/exception/loginFieldIsEmptyException.dart';
 import 'package:flutter/material.dart';
 import 'gen_l10n/l10n.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -33,7 +34,13 @@ class MyHomePage extends StatelessWidget {
   final passwordController = TextEditingController();
 
   void _login(BuildContext context, L10n l10n) {
-    _navigateToMainMenu(context);
+    try{
+      if(_validateLoginFields(l10n))
+        _navigateToMainMenu(context);
+    } on LoginFieldIsEmptyException catch (e){
+      _showAlertDialog(context, l10n, e.cause);
+    }
+
   }
 
   void _navigateToMainMenu(BuildContext context) {
@@ -41,6 +48,41 @@ class MyHomePage extends StatelessWidget {
       MaterialPageRoute(
         builder: (context) => const MainMenu(),
       ),
+    );
+  }
+
+  bool _validateLoginFields(L10n l10n){
+    if(usernameController.text == "" || passwordController.text == "")
+      throw new LoginFieldIsEmptyException(l10n.loginFieldIsEmptyExceptionMessage);
+
+    return true;
+  }
+
+  _showAlertDialog(BuildContext context, L10n l10n, String errorMessage) {
+
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text(l10n.back),
+      onPressed: () {
+        Navigator.of(context).pop();
+        },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(l10n.errorTitle),
+      content: Text(errorMessage),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 

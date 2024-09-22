@@ -69,5 +69,15 @@
   "@injuryEstimatedUntil": {
     "description": "Label to injury date picker",
     "context": "InjuryRegisterPage"
+  },
+  "errorTitle": "Error!",
+  "@errorTitle": {
+    "description": "Error alert dialog title",
+    "context": "AlertDialog"
+  },
+  "loginFieldIsEmptyExceptionMessage": "Username and password must not be empty!",
+  "@loginFieldIsEmptyExceptionMessage": {
+    "description": "Exception message to show if login fields are empty",
+    "context": "MainPage"
   }
 }
