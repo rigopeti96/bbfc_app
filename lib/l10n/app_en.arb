@@ -79,5 +79,40 @@
   "@loginFieldIsEmptyExceptionMessage": {
     "description": "Exception message to show if login fields are empty",
     "context": "MainPage"
+  },
+  "changePassword": "Change password",
+  "@changePassword": {
+    "description": "Label to change password",
+    "context": "SettingsPage"
+  },
+  "newPasswordTag": "New password",
+  "@newPasswordTag": {
+    "description": "Label to set new password",
+    "context": "SettingsPage"
+  },
+  "newPasswordConfTag": "Confirm new password",
+  "@newPasswordConfTag": {
+    "description": "Label to confirm new password",
+    "context": "SettingsPage"
+  },
+  "saveButtonText": "Save",
+  "@saveButtonText": {
+    "description": "Text for save buttons",
+    "context": "Application"
+  },
+  "okButtonText": "OK",
+  "@okButtonText": {
+    "description": "Text for OK buttons",
+    "context": "Application"
+  },
+  "oldAndNewPasswordNotMatchExceptionMessage": "Given password does not match with your password!",
+  "@oldAndNewPasswordNotMatchExceptionMessage": {
+    "description": "Exception message to show if old password does not match",
+    "context": "SettingsPage"
+  },
+  "newPasswordAndConfirmExceptionMessage": "New password and password confirm does not match!",
+  "@newPasswordAndConfirmExceptionMessage": {
+    "description": "Exception message to show if new password and new password confirm does not match",
+    "context": "SettingsPage"
   }
 }

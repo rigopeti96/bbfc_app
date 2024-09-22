@@ -15,5 +15,12 @@
   "settings": "Beállítások",
   "injuryEstimatedUntil": "Sérült státusz dátuma",
   "errorTitle": "Hiba!",
-  "loginFieldIsEmptyExceptionMessage": "A felhasználónév és a jelszó mezó nem lehet üres!"
+  "loginFieldIsEmptyExceptionMessage": "A felhasználónév és a jelszó mezó nem lehet üres!",
+  "changePassword": "Jelszó megváltoztatása",
+  "newPasswordTag": "Új jelszó",
+  "newPasswordConfTag": "Jelszó megerősítése",
+  "saveButtonText": "Mentés",
+  "okButtonText": "OK",
+  "oldAndNewPasswordNotMatchExceptionMessage": "A megadott jelszó helytelen!",
+  "newPasswordAndConfirmExceptionMessage": "A jelszó és a megerősítés nem egyezik!"
 }

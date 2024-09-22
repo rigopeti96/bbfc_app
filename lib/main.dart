@@ -1,8 +1,8 @@
 import 'package:bbfc_application/ui/mainMenu.dart';
 import 'package:bbfc_application/exception/loginFieldIsEmptyException.dart';
+import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
 import 'gen_l10n/l10n.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 
@@ -34,13 +34,14 @@ class MyHomePage extends StatelessWidget {
   final passwordController = TextEditingController();
 
   void _login(BuildContext context, L10n l10n) {
+    Validator validator = Validator();
     try{
-      if(_validateLoginFields(l10n))
+      if(validator.validateLoginFields(usernameController.text, passwordController.text, l10n)) {
         _navigateToMainMenu(context);
+      }
     } on LoginFieldIsEmptyException catch (e){
       _showAlertDialog(context, l10n, e.cause);
     }
-
   }
 
   void _navigateToMainMenu(BuildContext context) {
@@ -52,14 +53,14 @@ class MyHomePage extends StatelessWidget {
   }
 
   bool _validateLoginFields(L10n l10n){
-    if(usernameController.text == "" || passwordController.text == "")
-      throw new LoginFieldIsEmptyException(l10n.loginFieldIsEmptyExceptionMessage);
+    if(usernameController.text.isEmpty || passwordController.text.isEmpty) {
+      throw LoginFieldIsEmptyException(l10n.loginFieldIsEmptyExceptionMessage);
+    }
 
     return true;
   }
 
   _showAlertDialog(BuildContext context, L10n l10n, String errorMessage) {
-
     // set up the button
     Widget okButton = TextButton(
       child: Text(l10n.back),
