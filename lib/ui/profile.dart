@@ -1,18 +1,21 @@
+import 'package:bbfc_application/entity/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class Profile extends StatefulWidget{
-  const Profile({super.key});
+  final User user;
+  const Profile({super.key, required this.user});
 
   @override
   ProfileState createState() {
-    return ProfileState();
+    return ProfileState(user: user);
   }
 }
 
 class ProfileState extends State<Profile>{
-  ProfileState();
+  final User user;
+  ProfileState({required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,15 @@ class ProfileState extends State<Profile>{
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(5), //apply padding to all four sides
-              child: Text("${l10n.fullNameTag}: Rigó Peti"),
+              child: Text("${l10n.fullNameTag}: ${user.name}"),
             ),
             Padding(
               padding: const EdgeInsets.all(5), //apply padding to all four sides
-              child: Text("${l10n.userNameTag}: testuser_rigopeti96"),
+              child: Text("${l10n.userNameTag}: ${user.username}"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(5), //apply padding to all four sides
+              child: Text("${l10n.emailTag}: ${user.email}"),
             ),
             Padding(
               padding: const EdgeInsets.all(5), //apply padding to all four sides

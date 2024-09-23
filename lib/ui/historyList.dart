@@ -13,22 +13,22 @@ import 'package:uuid/uuid.dart';
 import '../entity/event.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
-class EventListPage extends StatefulWidget{
-  const EventListPage({super.key});
+class HistoryListPage extends StatefulWidget{
+  const HistoryListPage({super.key});
 
   @override
-  EventListState createState() {
-    return EventListState();
+  HistoryListState createState() {
+    return HistoryListState();
   }
 }
 
-class EventListState extends State<EventListPage>{
+class HistoryListState extends State<HistoryListPage>{
   List<dynamic> eventList = [];
   var uuid = Uuid();
   TestItemGenerator generator = TestItemGenerator();
   Set<User> appliedPlayers = {};
 
-  EventListState();
+  HistoryListState();
 
   void _generateEvents(){
     appliedPlayers.add(generator.createAppliedUser1());
@@ -56,7 +56,7 @@ class EventListState extends State<EventListPage>{
 
   String _getItemType(item, L10n l10n){
     if(item is Match){
-      return "${item.enemyTeam}, $l10n.match";
+      return l10n.match;
     }
 
     if(item is Training){

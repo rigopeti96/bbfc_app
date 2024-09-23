@@ -55,6 +55,11 @@
     "description": "Button text, navigate to event page",
     "context": "MainMenu"
   },
+  "history": "Event history",
+  "@history": {
+    "description": "Button text, navigate to event history page",
+    "context": "MainMenu"
+  },
   "injury": "Register injury",
   "@injury": {
     "description": "Button text, navigate to injury registration page",
@@ -129,5 +134,20 @@
   "@sportsMedicineExamination": {
     "description": "Exception message to show if new password and new password confirm does not match",
     "context": "SettingsPage"
+  },
+  "eventResponsePageTitle": "Event response",
+  "@eventResponsePageTitle": {
+    "description": "Event response page title text",
+    "context": "EventApplicationPage"
+  },
+  "denyButton": "❌ - Deny",
+  "@denyButton": {
+    "description": "Deny event button text",
+    "context": "EventApplicationPage"
+  },
+  "applyButton": "✅ - Apply",
+  "@applyButton": {
+    "description": "Apply to event button text",
+    "context": "EventApplicationPage"
   }
 }

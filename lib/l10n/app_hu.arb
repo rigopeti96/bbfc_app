@@ -10,7 +10,8 @@
   "emailTag": "E-mail cím",
   "back": "Vissza",
   "profile": "Profil",
-  "events": "Események",
+  "events": "Közelgő események",
+  "history": "Korábbi események",
   "injury": "Sérülés bejelentő",
   "settings": "Beállítások",
   "injuryEstimatedUntil": "Sérült státusz dátuma",
@@ -25,5 +26,8 @@
   "newPasswordAndConfirmExceptionMessage": "A jelszó és a megerősítés nem egyezik!",
   "training": "Edzés",
   "match": "Mérkőzés",
-  "sportsMedicineExamination": "Sportorvosi vizsgálat"
+  "sportsMedicineExamination": "Sportorvosi vizsgálat",
+  "eventResponsePageTitle": "Esemény visszajelzés",
+  "denyButton": "❌ - Elutasítás",
+  "applyButton": "✅ - Jelentkezés"
 }

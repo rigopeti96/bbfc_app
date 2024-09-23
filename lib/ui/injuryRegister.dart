@@ -40,6 +40,9 @@ class _InjuryRegisterPageState extends State<InjuryRegisterPage>{
             Text("${selectedDate.toLocal()}".split(' ')[0]),
             const SizedBox(height: 20.0,),
             ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                minimumSize: const Size.fromHeight(40), // fromHeight use double.infinity as width and 40 is the height
+              ),
               onPressed: () => _selectDate(context),
               child: const Text('Select date'),
             ),

@@ -47,7 +47,7 @@ class MyHomePage extends StatelessWidget {
   void _navigateToMainMenu(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const MainMenu(),
+        builder: (context) => MainMenu(),
       ),
     );
   }

@@ -44,7 +44,7 @@ class SettingState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     final L10n l10n = L10n.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.profile)),
+      appBar: AppBar(title: Text(l10n.settings)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
