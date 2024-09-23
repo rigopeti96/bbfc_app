@@ -52,14 +52,6 @@ class MyHomePage extends StatelessWidget {
     );
   }
 
-  bool _validateLoginFields(L10n l10n){
-    if(usernameController.text.isEmpty || passwordController.text.isEmpty) {
-      throw LoginFieldIsEmptyException(l10n.loginFieldIsEmptyExceptionMessage);
-    }
-
-    return true;
-  }
-
   _showAlertDialog(BuildContext context, L10n l10n, String errorMessage) {
     // set up the button
     Widget okButton = TextButton(

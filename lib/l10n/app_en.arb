@@ -114,5 +114,20 @@
   "@newPasswordAndConfirmExceptionMessage": {
     "description": "Exception message to show if new password and new password confirm does not match",
     "context": "SettingsPage"
+  },
+  "training": "Training",
+  "@training": {
+    "description": "Exception message to show if new password and new password confirm does not match",
+    "context": "SettingsPage"
+  },
+  "match": "Match",
+  "@match": {
+    "description": "Exception message to show if new password and new password confirm does not match",
+    "context": "SettingsPage"
+  },
+  "sportsMedicineExamination": "Sports Medicine Examination",
+  "@sportsMedicineExamination": {
+    "description": "Exception message to show if new password and new password confirm does not match",
+    "context": "SettingsPage"
   }
 }

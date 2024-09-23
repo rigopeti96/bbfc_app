@@ -21,7 +21,7 @@ class Training extends Event{
 
   factory Training.fromJson(Map<String, dynamic> json) {
     return Training(
-      id: json['id'] as Uuid,
+      id: json['id'] as String,
       modifyDate: json['modifyDate'] as DateTime,
       modifyUser: json['modifyUser'] as User,
       eventDate: json['eventDate'] as DateTime,

@@ -22,5 +22,8 @@
   "saveButtonText": "Mentés",
   "okButtonText": "OK",
   "oldAndNewPasswordNotMatchExceptionMessage": "A megadott jelszó helytelen!",
-  "newPasswordAndConfirmExceptionMessage": "A jelszó és a megerősítés nem egyezik!"
+  "newPasswordAndConfirmExceptionMessage": "A jelszó és a megerősítés nem egyezik!",
+  "training": "Edzés",
+  "match": "Mérkőzés",
+  "sportsMedicineExamination": "Sportorvosi vizsgálat"
 }

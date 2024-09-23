@@ -3,6 +3,7 @@ import 'package:bbfc_application/entity/user.dart';
 import 'package:uuid/uuid.dart';
 
 class Event extends Item {
+  User modifyUser;
   final DateTime eventDate;
   final DateTime meetingTime;
   final int eventLocationZipCode;
@@ -12,7 +13,7 @@ class Event extends Item {
   Event({
     required super.id,
     required super.modifyDate,
-    required super.modifyUser,
+    required this.modifyUser,
     required this.eventDate,
     required this.meetingTime,
     required this.eventLocationZipCode,
@@ -22,7 +23,7 @@ class Event extends Item {
 
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
-      id: json['id'] as Uuid,
+      id: json['id'] as String,
       modifyDate: json['modifyDate'] as DateTime,
       modifyUser: json['modifyUser'] as User,
       eventDate: json['eventDate'] as DateTime,

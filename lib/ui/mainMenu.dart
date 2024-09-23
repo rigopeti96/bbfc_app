@@ -1,3 +1,4 @@
+import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
 import 'package:bbfc_application/ui/profile.dart';
 import 'package:bbfc_application/ui/settings.dart';
@@ -20,6 +21,14 @@ class MainMenu extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const InjuryRegisterPage(),
+      ),
+    );
+  }
+
+  void _navigateToEvents(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const EventListPage(),
       ),
     );
   }
@@ -50,7 +59,7 @@ class MainMenu extends StatelessWidget {
                   ElevatedButton(
                     child: Text(l10n.events),
                     onPressed: (){
-
+                      _navigateToEvents(context);
                     },
                   ),
                   ElevatedButton(
