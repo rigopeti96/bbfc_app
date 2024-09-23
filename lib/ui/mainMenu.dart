@@ -1,4 +1,6 @@
+import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/ui/eventList.dart';
+import 'package:bbfc_application/ui/historyList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
 import 'package:bbfc_application/ui/profile.dart';
 import 'package:bbfc_application/ui/settings.dart';
@@ -8,7 +10,8 @@ import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class MainMenu extends StatelessWidget {
-  MainMenu({super.key});
+  final User actUser;
+  MainMenu({super.key, required this.actUser});
   final TestItemGenerator generator = TestItemGenerator();
 
   void _navigateToProfile(BuildContext context) {
@@ -31,6 +34,14 @@ class MainMenu extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const EventListPage(),
+      ),
+    );
+  }
+
+  void _navigateToHistory(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => HistoryListPage(actUser: actUser),
       ),
     );
   }
@@ -76,7 +87,7 @@ class MainMenu extends StatelessWidget {
                     ),
                     child: Text(l10n.history),
                     onPressed: (){
-                      _navigateToEvents(context);
+                      _navigateToHistory(context);
                     },
                   ),
                   ElevatedButton(

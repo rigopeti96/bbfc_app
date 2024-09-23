@@ -1,4 +1,5 @@
 import 'package:bbfc_application/exception/passwordNotMatchException.dart';
+import 'package:bbfc_application/exception/ratingFieldIsEmptyException.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 import '../exception/loginFieldIsEmptyException.dart';
@@ -20,6 +21,14 @@ class Validator {
 
     if(newPassword != newPasswordConf){
       throw PasswordNotMatchException(l10n.newPasswordAndConfirmExceptionMessage);
+    }
+
+    return true;
+  }
+
+  bool validateRating(String actualRating, L10n l10n){
+    if(actualRating.isEmpty || actualRating == ""){
+      throw RatingFieldIsEmptyException(l10n.ratingFieldIsEmptyExceptionMessage);
     }
 
     return true;

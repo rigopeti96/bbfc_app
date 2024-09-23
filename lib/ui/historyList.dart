@@ -5,6 +5,7 @@ import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/matchType.dart';
 import 'package:bbfc_application/enum/pitchSelector.dart';
 import 'package:bbfc_application/ui/eventApplication.dart';
+import 'package:bbfc_application/ui/rateTeammates.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -14,56 +15,40 @@ import '../entity/event.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class HistoryListPage extends StatefulWidget{
-  const HistoryListPage({super.key});
+  final User actUser;
+  const HistoryListPage({super.key, required this.actUser});
 
   @override
   HistoryListState createState() {
-    return HistoryListState();
+    return HistoryListState(actUser: actUser);
   }
 }
 
 class HistoryListState extends State<HistoryListPage>{
+  final User actUser;
   List<dynamic> eventList = [];
   var uuid = Uuid();
   TestItemGenerator generator = TestItemGenerator();
   Set<User> appliedPlayers = {};
 
-  HistoryListState();
+  HistoryListState({required this.actUser});
 
   void _generateEvents(){
     appliedPlayers.add(generator.createAppliedUser1());
     appliedPlayers.add(generator.createAppliedUser2());
     appliedPlayers.add(generator.createAppliedUser3());
-    SportsMedicineExamination medExam = SportsMedicineExamination(
-        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 2360, eventLocationCity: "Gyál", eventLocationAddress: "Ady Endre utca 22", prize: 5000, appliedPlayers: appliedPlayers);
-    Training training = Training(
-        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", duration: 2, appliedPlayers: appliedPlayers);
     Match match = Match(
-        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", enemyTeam: "EDSE II.", homeGoals: 0, awayGoals: 0, selector: PitchSelector.BBFC, matchType: MatchType.LEAGUE, ratings: {});
+        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", enemyTeam: "BEAC II.", homeGoals: 3, awayGoals: 2, selector: PitchSelector.BBFC, matchType: MatchType.LEAGUE, ratings: {});
 
-    eventList.add(medExam);
-    eventList.add(training);
     eventList.add(match);
   }
 
-  void _navigateToApplyFormPage(BuildContext context, String eventId) {
+  void _navigateToRatingFormPage(BuildContext context, String eventId) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EventApplicationPage(eventId: eventId),
+        builder: (context) => RateTeammatesPage(user: actUser, ),
       ),
     );
-  }
-
-  String _getItemType(item, L10n l10n){
-    if(item is Match){
-      return l10n.match;
-    }
-
-    if(item is Training){
-      return l10n.training;
-    }
-
-    return l10n.sportsMedicineExamination;
   }
 
   void onTapGesture(item) {
@@ -77,7 +62,7 @@ class HistoryListState extends State<HistoryListPage>{
     _generateEvents();
     final L10n l10n = L10n.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.events)),
+      appBar: AppBar(title: Text(l10n.history)),
       body: ListView.builder(
         itemCount: eventList.length,
         itemBuilder: (context, index) {
@@ -90,7 +75,7 @@ class HistoryListState extends State<HistoryListPage>{
                     children: [
                       Column(
                         children: [
-                          Text(_getItemType(eventList[index], l10n)),
+                          Text("${eventList[index].enemyTeam}, ${l10n.match}"),
                           Text(eventList[index].eventDate.toString().replaceAll("T", " ").replaceRange(
                               eventList[index].eventDate.toString().length-4,
                               eventList[index].eventDate.toString().length,
@@ -102,7 +87,7 @@ class HistoryListState extends State<HistoryListPage>{
                         icon: const Icon(Icons.navigate_next),
                         iconSize: 40,
                         onPressed: () {
-                          _navigateToApplyFormPage(context, eventList[index].id);
+                          _navigateToRatingFormPage(context, eventList[index].id);
                         },
                       )
                     ],

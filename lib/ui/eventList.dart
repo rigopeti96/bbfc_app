@@ -56,7 +56,7 @@ class EventListState extends State<EventListPage>{
 
   String _getItemType(item, L10n l10n){
     if(item is Match){
-      return "${item.enemyTeam}, $l10n.match";
+      return "${item.enemyTeam}, ${l10n.match}";
     }
 
     if(item is Training){

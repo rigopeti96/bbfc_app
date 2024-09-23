@@ -85,6 +85,11 @@
     "description": "Exception message to show if login fields are empty",
     "context": "MainPage"
   },
+  "ratingFieldIsEmptyExceptionMessage": "Rating field must not be empty!",
+  "@ratingFieldIsEmptyExceptionMessage": {
+    "description": "Exception message to show if rating field are empty",
+    "context": "RateTeammatesPage"
+  },
   "changePassword": "Change password",
   "@changePassword": {
     "description": "Label to change password",

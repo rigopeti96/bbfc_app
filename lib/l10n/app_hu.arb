@@ -17,6 +17,7 @@
   "injuryEstimatedUntil": "Sérült státusz dátuma",
   "errorTitle": "Hiba!",
   "loginFieldIsEmptyExceptionMessage": "A felhasználónév és a jelszó mezó nem lehet üres!",
+  "ratingFieldIsEmptyExceptionMessage": "Az értékelőmező nem maradhat üres!",
   "changePassword": "Jelszó megváltoztatása",
   "newPasswordTag": "Új jelszó",
   "newPasswordConfTag": "Jelszó megerősítése",

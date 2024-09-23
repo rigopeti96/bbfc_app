@@ -1,5 +1,7 @@
+import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/ui/mainMenu.dart';
 import 'package:bbfc_application/exception/loginFieldIsEmptyException.dart';
+import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
 import 'gen_l10n/l10n.dart';
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({Key? key}) : super(key: key);
+  final TestItemGenerator generator = TestItemGenerator();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -45,9 +48,10 @@ class MyHomePage extends StatelessWidget {
   }
 
   void _navigateToMainMenu(BuildContext context) {
+    User actUser = generator.createCreatorUser();
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MainMenu(),
+        builder: (context) => MainMenu(actUser: actUser),
       ),
     );
   }
@@ -96,6 +100,7 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              Image.asset('icon/bbfc_icon.png'),
               TextField(
                 controller: usernameController,
                 decoration: InputDecoration(
