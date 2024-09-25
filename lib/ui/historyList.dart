@@ -46,7 +46,7 @@ class HistoryListState extends State<HistoryListPage>{
   void _navigateToRatingFormPage(BuildContext context, String eventId) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => RateTeammatesPage(user: actUser, ),
+        builder: (context) => RateTeammatesPage(user: actUser),
       ),
     );
   }

@@ -30,5 +30,8 @@
   "sportsMedicineExamination": "Sportorvosi vizsgálat",
   "eventResponsePageTitle": "Esemény visszajelzés",
   "denyButton": "❌ - Elutasítás",
-  "applyButton": "✅ - Jelentkezés"
+  "applyButton": "✅ - Jelentkezés",
+  "ratingTag": "Értékelés (1-10)",
+  "ratingTitle": "Értékelés",
+  "ratingValueIsInvalidExceptionMessage": "Az értékelésnek 1 és 10 között kell lennie!"
 }

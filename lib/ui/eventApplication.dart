@@ -36,17 +36,6 @@ class EventApplicationPage extends StatelessWidget {
 
               },
             ),
-            Expanded(
-              child: Align(
-                alignment: FractionalOffset.bottomCenter,
-                child: MaterialButton(
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(l10n.back),
-                ),
-              ),
-            ),
           ],
         ),
       ),

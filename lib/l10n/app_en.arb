@@ -125,6 +125,11 @@
     "description": "Exception message to show if new password and new password confirm does not match",
     "context": "SettingsPage"
   },
+  "ratingValueIsInvalidExceptionMessage": "Rate value must be between 1 and 10!",
+  "@ratingValueIsInvalidExceptionMessage": {
+    "description": "Exception message to show if rating value is invalid",
+    "context": "RateTeammatesPage"
+  },
   "training": "Training",
   "@training": {
     "description": "Exception message to show if new password and new password confirm does not match",
@@ -154,5 +159,15 @@
   "@applyButton": {
     "description": "Apply to event button text",
     "context": "EventApplicationPage"
+  },
+  "ratingTag": "Rating (1-10)",
+  "@ratingTag": {
+    "description": "Hint text to rating field",
+    "context": "RateTeammatesPage"
+  },
+  "ratingTitle": "Rating",
+  "@ratingTitle": {
+    "description": "Title text to rating page",
+    "context": "RateTeammatesPage"
   }
 }

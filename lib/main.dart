@@ -89,12 +89,12 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(l10n!.homeTitle)),
       body: Container(
-        decoration: const BoxDecoration(
+        /*decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/splash.jpg"),
             fit: BoxFit.cover,
           ),
-        ),
+        ),*/
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(

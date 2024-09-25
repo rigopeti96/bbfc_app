@@ -3,9 +3,9 @@ import 'package:bbfc_application/entity/user.dart';
 class Rating{
   final User ratedPlayer;
   final User rater;
-  final int rateValue;
+  int rateValue;
 
-  const Rating({
+  Rating({
     required this.ratedPlayer,
     required this.rater,
     required this.rateValue
