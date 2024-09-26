@@ -1,6 +1,7 @@
 import 'package:bbfc_application/exception/passwordNotMatchException.dart';
 import 'package:bbfc_application/exception/ratingFieldIsEmptyException.dart';
 import 'package:bbfc_application/exception/ratingValueIsInvalidException.dart';
+import 'package:bbfc_application/exception/trainingFieldIsEmptyException.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 
 import '../exception/loginFieldIsEmptyException.dart';
@@ -34,6 +35,14 @@ class Validator {
 
     if(int.parse(actualRating) < 1 || int.parse(actualRating) > 10){
       throw RatingValueIsInvalidException(l10n.ratingValueIsInvalidExceptionMessage);
+    }
+
+    return true;
+  }
+
+  bool validateTrainingPlan(String trainingPlan, L10n l10n){
+    if(trainingPlan.isEmpty || trainingPlan == ""){
+      throw TrainingFieldIsEmptyException(l10n.trainingFieldIsEmptyExceptionMessage);
     }
 
     return true;

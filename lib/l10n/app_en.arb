@@ -130,6 +130,11 @@
     "description": "Exception message to show if rating value is invalid",
     "context": "RateTeammatesPage"
   },
+  "trainingFieldIsEmptyExceptionMessage": "Training value must not be empty!",
+  "@trainingFieldIsEmptyExceptionMessage": {
+    "description": "Exception message to show training plan is empty",
+    "context": "TrainingHistoryDataPage"
+  },
   "training": "Training",
   "@training": {
     "description": "Training title",
@@ -145,9 +150,29 @@
     "description": "Training history title",
     "context": "TrainingHistoryListPage"
   },
+  "trainingDuration": "Training duration",
+  "@trainingDuration": {
+    "description": "Training duration tag",
+    "context": "TrainingHistoryDataPage"
+  },
+  "trainingDurationMeasurementUnit": "hour(s)",
+  "@trainingDurationMeasurementUnit": {
+    "description": "Training duration tag measurement unit",
+    "context": "TrainingHistoryDataPage"
+  },
+  "trainingPlace": "Training place",
+  "@trainingPlace": {
+    "description": "Training place tag",
+    "context": "TrainingHistoryDataPage"
+  },
   "trainingPlanHint": "Session planned for training",
   "@trainingPlanHint": {
     "description": "Hint text to test area",
+    "context": "TrainingHistoryDataPage"
+  },
+  "trainingPlanSaved": "Session plan saved for training",
+  "@trainingPlanSaved": {
+    "description": "Message to successful save",
     "context": "TrainingHistoryDataPage"
   },
   "match": "Match",
