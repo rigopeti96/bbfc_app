@@ -4,6 +4,7 @@ import 'package:bbfc_application/ui/historyList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
 import 'package:bbfc_application/ui/profile.dart';
 import 'package:bbfc_application/ui/settings.dart';
+import 'package:bbfc_application/ui/trainingHistoryList.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -42,6 +43,14 @@ class MainMenu extends StatelessWidget {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => HistoryListPage(actUser: actUser),
+      ),
+    );
+  }
+
+  void _navigateToTrainingHistory(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => TrainingHistoryListPage(actUser: actUser),
       ),
     );
   }
@@ -88,6 +97,15 @@ class MainMenu extends StatelessWidget {
                     child: Text(l10n.history),
                     onPressed: (){
                       _navigateToHistory(context);
+                    },
+                  ),
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: const Size.fromHeight(40), // fromHeight use double.infinity as width and 40 is the height
+                    ),
+                    child: Text(l10n.trainingHistory),
+                    onPressed: (){
+                      _navigateToTrainingHistory(context);
                     },
                   ),
                   ElevatedButton(

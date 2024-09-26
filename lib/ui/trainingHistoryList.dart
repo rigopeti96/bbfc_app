@@ -5,6 +5,8 @@ import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/matchType.dart';
 import 'package:bbfc_application/enum/pitchSelector.dart';
 import 'package:bbfc_application/ui/eventApplication.dart';
+import 'package:bbfc_application/ui/rateTeammates.dart';
+import 'package:bbfc_application/ui/trainingHistoryData.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -13,57 +15,41 @@ import 'package:uuid/uuid.dart';
 import '../entity/event.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
-class EventListPage extends StatefulWidget{
-  const EventListPage({super.key});
+class TrainingHistoryListPage extends StatefulWidget{
+  final User actUser;
+  const TrainingHistoryListPage({super.key, required this.actUser});
 
   @override
-  EventListState createState() {
-    return EventListState();
+  TrainingHistoryListState createState() {
+    return TrainingHistoryListState(actUser: actUser);
   }
 }
 
-class EventListState extends State<EventListPage>{
-  List<dynamic> eventList = [];
+class TrainingHistoryListState extends State<TrainingHistoryListPage>{
+  final User actUser;
+  List<dynamic> trainingList = [];
   var uuid = Uuid();
   TestItemGenerator generator = TestItemGenerator();
   Set<User> appliedPlayers = {};
 
-  EventListState();
+  TrainingHistoryListState({required this.actUser});
 
   void _generateEvents(){
     appliedPlayers.add(generator.createAppliedUser1());
     appliedPlayers.add(generator.createAppliedUser2());
     appliedPlayers.add(generator.createAppliedUser3());
-    SportsMedicineExamination medExam = SportsMedicineExamination(
-        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 2360, eventLocationCity: "Gyál", eventLocationAddress: "Ady Endre utca 22", prize: 5000, appliedPlayers: appliedPlayers);
     Training training = Training(
         id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", duration: 2, trainingPlan: "", appliedPlayers: appliedPlayers);
-    Match match = Match(
-        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", enemyTeam: "EDSE II.", homeGoals: 0, awayGoals: 0, selector: PitchSelector.BBFC, matchType: MatchType.LEAGUE, ratings: {});
 
-    eventList.add(medExam);
-    eventList.add(training);
-    eventList.add(match);
+    trainingList.add(training);
   }
 
-  void _navigateToApplyFormPage(BuildContext context, String eventId) {
+  void _navigateToTrainingHistoryData(BuildContext context, Training training) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EventApplicationPage(eventId: eventId),
+        builder: (context) => TrainingHistoryDataPage(user: actUser, training: training),
       ),
     );
-  }
-
-  String _getItemType(item, L10n l10n){
-    if(item is Match){
-      return "${item.enemyTeam}, ${l10n.match}";
-    }
-
-    if(item is Training){
-      return l10n.training;
-    }
-
-    return l10n.sportsMedicineExamination;
   }
 
   void onTapGesture(item) {
@@ -77,9 +63,9 @@ class EventListState extends State<EventListPage>{
     _generateEvents();
     final L10n l10n = L10n.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.events)),
+      appBar: AppBar(title: Text(l10n.history)),
       body: ListView.builder(
-        itemCount: eventList.length,
+        itemCount: trainingList.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             child: Card(
@@ -88,28 +74,19 @@ class EventListState extends State<EventListPage>{
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
-                        children: [
-                          Text(_getItemType(eventList[index], l10n)),
-                          Text(eventList[index].eventDate.toString().replaceAll("T", " ").replaceRange(
-                              eventList[index].eventDate.toString().length-4,
-                              eventList[index].eventDate.toString().length,
-                              ""
-                          )),
-                        ],
-                      ),
+                      Text("${l10n.training} - ${trainingList[index].eventDate}"),
                       IconButton(
                         icon: const Icon(Icons.navigate_next),
                         iconSize: 40,
                         onPressed: () {
-                          _navigateToApplyFormPage(context, eventList[index].id);
+                          _navigateToTrainingHistoryData(context, trainingList[index]);
                         },
                       )
                     ],
                   )
               ),
             ),
-            onTap: () => onTapGesture(eventList[index]),
+            onTap: () => onTapGesture(trainingList[index]),
           );
         },
       ),

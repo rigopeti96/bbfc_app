@@ -4,6 +4,7 @@ import 'package:uuid/uuid.dart';
 
 class Training extends Event{
   final double duration;
+  String trainingPlan;
   Set<User> appliedPlayers;
 
   Training({
@@ -16,6 +17,7 @@ class Training extends Event{
     required super.eventLocationCity,
     required super.eventLocationAddress,
     required this.duration,
+    required this.trainingPlan,
     required this.appliedPlayers
   });
 
@@ -30,6 +32,7 @@ class Training extends Event{
       eventLocationCity: json['eventLocationCity'] as String,
       eventLocationAddress: json['eventLocationAddress'] as String,
       duration: json['duration'] as double,
+      trainingPlan: json['trainingPlan'] as String,
       appliedPlayers: json['appliedPlayers'] as Set<User>,
     );
   }

@@ -132,8 +132,23 @@
   },
   "training": "Training",
   "@training": {
-    "description": "Exception message to show if new password and new password confirm does not match",
-    "context": "SettingsPage"
+    "description": "Training title",
+    "context": "Application"
+  },
+  "trainingHistory": "Training history",
+  "@trainingHistory": {
+    "description": "Training history title",
+    "context": "TrainingHistoryListPage"
+  },
+  "trainingPlan": "Training plan",
+  "@trainingPlan": {
+    "description": "Training history title",
+    "context": "TrainingHistoryListPage"
+  },
+  "trainingPlanHint": "Session planned for training",
+  "@trainingPlanHint": {
+    "description": "Hint text to test area",
+    "context": "TrainingHistoryDataPage"
   },
   "match": "Match",
   "@match": {

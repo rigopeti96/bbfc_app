@@ -61,7 +61,7 @@ class RateTeammatesState extends State<RateTeammatesPage>{
                 child: Text(l10n.ratingTitle),
                 onPressed: (){
                   _insertRating(ratingController.text, ratedUser, l10n);
-                  Navigator.of(context).pop();
+                  Navigator.of(context).pop(ratingController.text);
                 },
               )
             ],
