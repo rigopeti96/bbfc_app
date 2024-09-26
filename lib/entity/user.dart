@@ -7,10 +7,17 @@ import '../enum/permisson.dart';
 
 class User extends Item{
   final String name;
+  String phoneNumber;
+  DateTime birthDay;
+  String birthPlace;
   final String username;
   final String password;
   final String email;
   final Permission roles;
+  int goals;
+  int assists;
+  DateTime? injuredUntil;
+  DateTime? suspendedUntil;
   Set<Rating> ratings;
   Status playerStatus;
 
@@ -18,10 +25,17 @@ class User extends Item{
     required super.id,
     required super.modifyDate,
     required this.name,
+    required this.phoneNumber,
+    required this.birthDay,
+    required this.birthPlace,
     required this.username,
     required this.password,
     required this.email,
     required this.roles,
+    required this.goals,
+    required this.assists,
+    required this.injuredUntil,
+    required this.suspendedUntil,
     required this.ratings,
     required this.playerStatus,
   });
@@ -31,10 +45,17 @@ class User extends Item{
       id: json['id'] as String,
       modifyDate: json['modifyDate'] as DateTime,
       name: json['name'] as String,
+      phoneNumber: json['phoneNumber'] as String,
+      birthDay: json['birthDay'] as DateTime,
+      birthPlace: json['birthPlace'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
       email: json['email'] as String,
       roles: json['roles'] as Permission,
+      goals: json['goals'] as int,
+      assists: json['assists'] as int,
+      injuredUntil: json['injuredUntil'] as DateTime,
+      suspendedUntil: json['suspendedUntil'] as DateTime,
       ratings: json['ratings'] as Set<Rating>,
       playerStatus: json['playerStatus'] as Status,
     );

@@ -1,16 +1,21 @@
+import 'package:bbfc_application/entity/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class InjuryRegisterPage extends StatefulWidget{
-  const InjuryRegisterPage({super.key});
+  final User actUser;
+  const InjuryRegisterPage({super.key, required this.actUser});
 
   @override
-  State<InjuryRegisterPage> createState() => _InjuryRegisterPageState();
+  State<InjuryRegisterPage> createState() => InjuryRegisterPageState(actUser: actUser);
 }
 
-class _InjuryRegisterPageState extends State<InjuryRegisterPage>{
+class InjuryRegisterPageState extends State<InjuryRegisterPage>{
   DateTime selectedDate = DateTime.now();
+  final User actUser;
+
+  InjuryRegisterPageState({required this.actUser});
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(

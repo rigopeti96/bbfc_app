@@ -26,7 +26,7 @@ class MainMenu extends StatelessWidget {
   void _navigateToInjuryRegister(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => const InjuryRegisterPage(),
+        builder: (context) => InjuryRegisterPage(actUser: actUser),
       ),
     );
   }
