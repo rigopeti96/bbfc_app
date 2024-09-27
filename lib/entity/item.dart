@@ -2,11 +2,11 @@ import 'package:bbfc_application/entity/user.dart';
 import 'package:uuid/uuid.dart';
 
 class Item {
-  final String id;
+  final String? id;
   DateTime modifyDate;
 
   Item({
-    required this.id,
+    this.id,
     required this.modifyDate
   });
 

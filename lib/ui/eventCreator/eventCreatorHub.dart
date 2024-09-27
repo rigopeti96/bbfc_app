@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
-class MainMenu extends StatelessWidget {
+class EventCreatorHubPage extends StatelessWidget {
   final User actUser;
-  MainMenu({super.key, required this.actUser});
+  EventCreatorHubPage({super.key, required this.actUser});
   final TestItemGenerator generator = TestItemGenerator();
 
   void _navigateToProfile(BuildContext context) {
@@ -23,7 +23,7 @@ class MainMenu extends StatelessWidget {
     );
   }
 
-  void _navigateToInjuryRegister(BuildContext context) {
+  void _navigateToMedicineExamCreator(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => InjuryRegisterPage(actUser: actUser),
@@ -47,7 +47,7 @@ class MainMenu extends StatelessWidget {
     );
   }
 
-  void _navigateToTrainingHistory(BuildContext context) {
+  void _navigateToTrainingCreator(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => TrainingHistoryListPage(actUser: actUser),
@@ -55,7 +55,7 @@ class MainMenu extends StatelessWidget {
     );
   }
 
-  void _navigateToSettings(BuildContext context) {
+  void _navigateToMatchCreator(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) => const SettingsPage(),
@@ -68,49 +68,31 @@ class MainMenu extends StatelessWidget {
     final L10n l10n = L10n.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text("${l10n.shortTitle} - ${l10n.mainMenuTitle}"),),
-        body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  MaterialButton(
-                    child: Text(l10n.profile),
-                    onPressed: (){
-                      _navigateToProfile(context);
-                    },
-                  ),
-                  MaterialButton(
-                    child: Text(l10n.events),
-                    onPressed: (){
-                      _navigateToEvents(context);
-                    },
-                  ),
-                  MaterialButton(
-                    child: Text(l10n.history),
-                    onPressed: (){
-                      _navigateToHistory(context);
-                    },
-                  ),
-                  MaterialButton(
-                    child: Text(l10n.trainingHistory),
-                    onPressed: (){
-                      _navigateToTrainingHistory(context);
-                    },
-                  ),
-                  MaterialButton(
-                    child: Text(l10n.injury),
-                    onPressed: (){
-                      _navigateToInjuryRegister(context);
-                    },
-                  ),
-                  MaterialButton(
-                    child: Text(l10n.settings),
-                    onPressed: (){
-                      _navigateToSettings(context);
-                    },
-                  ),
-                ],
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            MaterialButton(
+              child: Text(l10n.profile),
+              onPressed: (){
+                _navigateToProfile(context);
+              },
             ),
+            MaterialButton(
+              child: Text(l10n.events),
+              onPressed: (){
+                _navigateToEvents(context);
+              },
+            ),
+            MaterialButton(
+              child: Text(l10n.history),
+              onPressed: (){
+                _navigateToHistory(context);
+              },
+            ),
+          ],
         ),
+      ),
     );
   }
 }

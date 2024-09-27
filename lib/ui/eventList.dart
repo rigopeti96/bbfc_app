@@ -39,7 +39,7 @@ class EventListState extends State<EventListPage>{
     Training training = Training(
         id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", duration: 2, trainingPlan: "", appliedPlayers: appliedPlayers);
     Match match = Match(
-        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", enemyTeam: "EDSE II.", homeGoals: 0, awayGoals: 0, selector: PitchSelector.BBFC, matchType: MatchType.LEAGUE, ratings: {});
+        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", enemyTeam: "EDSE II.", homeGoals: 0, awayGoals: 0, pitchName: "Pluhár István sportpálya", selector: PitchSelector.BBFC, matchType: MatchType.LEAGUE, ratings: {});
 
     eventList.add(medExam);
     eventList.add(training);

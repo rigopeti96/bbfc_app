@@ -38,7 +38,7 @@ class HistoryListState extends State<HistoryListPage>{
     appliedPlayers.add(generator.createAppliedUser2());
     appliedPlayers.add(generator.createAppliedUser3());
     Match match = Match(
-        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", enemyTeam: "BEAC II.", homeGoals: 3, awayGoals: 2, selector: PitchSelector.BBFC, matchType: MatchType.LEAGUE, ratings: {});
+        id: uuid.v4(), modifyDate: DateTime.now(), modifyUser: generator.createCreatorUser(), eventDate: DateTime.now(), meetingTime: DateTime.now(), eventLocationZipCode: 1115, eventLocationCity: "Budapest", eventLocationAddress: "Mérnök utca 35", enemyTeam: "BEAC II.", homeGoals: 3, awayGoals: 2, pitchName: "Pluhár István sportpálya", selector: PitchSelector.BBFC, matchType: MatchType.LEAGUE, ratings: {});
 
     eventList.add(match);
   }

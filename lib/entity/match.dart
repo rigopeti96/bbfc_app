@@ -9,12 +9,13 @@ class Match extends Event{
   final String enemyTeam;
   int homeGoals;
   int awayGoals;
+  final String pitchName;
   final PitchSelector selector;
   final MatchType matchType;
   Set<Rating> ratings;
 
   Match({
-    required super.id,
+    super.id,
     required super.modifyDate,
     required super.modifyUser,
     required super.eventDate,
@@ -25,6 +26,7 @@ class Match extends Event{
     required this.enemyTeam,
     required this.homeGoals,
     required this.awayGoals,
+    required this.pitchName,
     required this.selector,
     required this.matchType,
     required this.ratings
@@ -43,6 +45,7 @@ class Match extends Event{
       enemyTeam: json['enemyTeam'] as String,
       homeGoals: json['homeGoals'] as int,
       awayGoals: json['eventLocationAddress'] as int,
+      pitchName: json['pitchName'] as String,
       selector: json['selector'] as PitchSelector,
       matchType: json['matchType'] as MatchType,
       ratings: json['ratings'] as Set<Rating>,

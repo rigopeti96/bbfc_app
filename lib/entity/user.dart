@@ -22,7 +22,7 @@ class User extends Item{
   Status playerStatus;
 
   User({
-    required super.id,
+    super.id,
     required super.modifyDate,
     required this.name,
     required this.phoneNumber,

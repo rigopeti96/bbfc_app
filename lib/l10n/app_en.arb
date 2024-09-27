@@ -209,5 +209,6 @@
   "@ratingTitle": {
     "description": "Title text to rating page",
     "context": "RateTeammatesPage"
-  }
+  },
+
 }
