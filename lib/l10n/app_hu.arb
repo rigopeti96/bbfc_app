@@ -41,5 +41,6 @@
   "applyButton": "✅ - Jelentkezés",
   "ratingTag": "Értékelés (1-10)",
   "ratingTitle": "Értékelés",
-  "ratingValueIsInvalidExceptionMessage": "Az értékelésnek 1 és 10 között kell lennie!"
+  "ratingValueIsInvalidExceptionMessage": "Az értékelésnek 1 és 10 között kell lennie!",
+  "createEventTitle": "Esemény létrehozása"
 }

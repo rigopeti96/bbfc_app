@@ -210,5 +210,9 @@
     "description": "Title text to rating page",
     "context": "RateTeammatesPage"
   },
-
+  "createEventTitle": "Create Event",
+  "@createEventTitle": {
+    "description": "Title text to create event",
+    "context": "RateTeammatesPage"
+  }
 }

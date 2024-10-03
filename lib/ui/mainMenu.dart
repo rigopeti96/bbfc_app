@@ -1,4 +1,6 @@
 import 'package:bbfc_application/entity/user.dart';
+import 'package:bbfc_application/enum/permisson.dart';
+import 'package:bbfc_application/ui/eventCreator/eventCreator.dart';
 import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/historyList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
@@ -63,6 +65,22 @@ class MainMenu extends StatelessWidget {
     );
   }
 
+  void _navigateToEventCreatorHub(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EventCreatorPage(actUser: actUser),
+      ),
+    );
+  }
+
+  bool _isPlayerPermission(){
+    if(actUser.roles == Permission.PLAYER){
+      return true;
+    }
+
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final L10n l10n = L10n.of(context)!;
@@ -95,6 +113,15 @@ class MainMenu extends StatelessWidget {
                     onPressed: (){
                       _navigateToTrainingHistory(context);
                     },
+                  ),
+                  Visibility(
+                    visible: !_isPlayerPermission(),
+                    child: MaterialButton(
+                      child: Text(l10n.trainingHistory),
+                      onPressed: (){
+                        _navigateToEventCreatorHub(context);
+                      },
+                    ),
                   ),
                   MaterialButton(
                     child: Text(l10n.injury),
