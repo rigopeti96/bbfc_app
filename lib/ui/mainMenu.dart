@@ -117,7 +117,7 @@ class MainMenu extends StatelessWidget {
                   Visibility(
                     visible: !_isPlayerPermission(),
                     child: MaterialButton(
-                      child: Text(l10n.trainingHistory),
+                      child: Text(l10n.createEventTitle),
                       onPressed: (){
                         _navigateToEventCreatorHub(context);
                       },

@@ -135,6 +135,11 @@
     "description": "Exception message to show training plan is empty",
     "context": "TrainingHistoryDataPage"
   },
+  "selectedDateIsInvalidExceptionMessage": "The selected time cannot be earlier than the current date!",
+  "@selectedDateIsInvalidExceptionMessage": {
+    "description": "Exception message to show training plan is empty",
+    "context": "TrainingHistoryDataPage"
+  },
   "training": "Training",
   "@training": {
     "description": "Training title",
@@ -213,6 +218,86 @@
   "createEventTitle": "Create Event",
   "@createEventTitle": {
     "description": "Title text to create event",
-    "context": "RateTeammatesPage"
+    "context": "EventCreatorPage"
+  },
+  "createEventDate": "Event date",
+  "@createEventDate": {
+    "description": "Event date tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventZipTag": "Event ZIP Code",
+  "@createEventZipTag": {
+    "description": "Event ZIP code tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventAddressCityTag": "Event city",
+  "@createEventAddressCityTag": {
+    "description": "Event city name tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventAddressTag": "Event address",
+  "@createEventAddressTag": {
+    "description": "Event address tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventAddress": "Event address",
+  "@createEventAddress": {
+    "description": "Event address separator tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventSpecificData": "Event's specific data",
+  "@createEventSpecificData": {
+    "description": "Event's specific data separator tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventEnemyTeamTag": "Enemy team",
+  "@createEventEnemyTeamTag": {
+    "description": "Enemy team hint tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventPitchNameTag": "Pitch name",
+  "@createEventPitchNameTag": {
+    "description": "Pitch name hint tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventSelectorTag": "Match selector team",
+  "@createEventSelectorTag": {
+    "description": "Match selector team hint tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventMatchTypeTag": "Match type",
+  "@createEventMatchTypeTag": {
+    "description": "Match type hint tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventSelectorValueHome": "Home",
+  "@createEventSelectorValueHome": {
+    "description": "Home tag",
+    "context": "EventCreatorPage"
+  },
+  "createEventSelectorValueAway": "Away",
+  "@createEventSelectorValueAway": {
+    "description": "Away tag",
+    "context": "EventCreatorPage"
+  },
+  "createMatchTypeValueCup": "Cup",
+  "@createMatchTypeValueCup": {
+    "description": "Cup tag",
+    "context": "EventCreatorPage"
+  },
+  "createMatchTypeValueLeague": "League",
+  "@createMatchTypeValueLeague": {
+    "description": "League tag",
+    "context": "EventCreatorPage"
+  },
+  "createExamPrize": "Prize (Ft)",
+  "@createExamPrize": {
+    "description": "Prize tag",
+    "context": "EventCreatorPage"
+  },
+  "btnSelectDate": "Select date",
+  "@btnSelectDate": {
+    "description": "Select date button text",
+    "context": "Application"
   }
 }
