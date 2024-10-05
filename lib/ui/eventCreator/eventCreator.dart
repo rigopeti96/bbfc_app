@@ -9,6 +9,7 @@ import 'package:bbfc_application/ui/trainingHistoryList.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
@@ -208,6 +209,10 @@ class EventCreatorPageState extends State<EventCreatorPage>{
             Visibility(
               visible: isTrainingSelected,
               child: TextField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
                 controller: durationController,
                 decoration: InputDecoration(
                   hintText: l10n.trainingDuration,
@@ -286,6 +291,10 @@ class EventCreatorPageState extends State<EventCreatorPage>{
             Visibility(
               visible: isSportsMedicineExaminationSelected,
               child: TextField(
+                keyboardType: TextInputType.number,
+                inputFormatters: <TextInputFormatter>[
+                  FilteringTextInputFormatter.digitsOnly
+                ],
                 controller: prizeController,
                 decoration: InputDecoration(
                   hintText: l10n.createExamPrize,

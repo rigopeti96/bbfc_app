@@ -5,6 +5,7 @@ import 'package:bbfc_application/exception/ratingValueIsInvalidException.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
@@ -54,6 +55,10 @@ class RateTeammatesState extends State<RateTeammatesPage>{
             children: <Widget>[
               Text(ratedUser.name),
               TextField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.digitsOnly
+                  ],
                 decoration: InputDecoration(hintText: l10n.ratingTag),
                 controller: ratingController
               ),

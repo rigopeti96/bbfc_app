@@ -1,4 +1,6 @@
 import 'package:bbfc_application/entity/user.dart';
+import 'package:bbfc_application/exception/selectedDateIsInvalidException.dart';
+import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -14,20 +16,55 @@ class InjuryRegisterPage extends StatefulWidget{
 class InjuryRegisterPageState extends State<InjuryRegisterPage>{
   DateTime selectedDate = DateTime.now();
   final User actUser;
+  final Validator validator = Validator();
 
   InjuryRegisterPageState({required this.actUser});
 
-  Future<void> _selectDate(BuildContext context) async {
+  Future<void> _selectDate(BuildContext context, L10n l10n) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
         firstDate: DateTime(2015, 8),
         lastDate: DateTime(2101));
+
     if (picked != null && picked != selectedDate) {
-      setState(() {
-        selectedDate = picked;
-      });
+      try{
+        if(validator.validateSelectedDate(picked, l10n)){
+          setState(() {
+            selectedDate = picked;
+          });
+        }
+      } on SelectedDateIsInvalidException catch(e){
+        _showAlertDialog(context, l10n, e.cause);
+      }
     }
+  }
+
+  _showAlertDialog(BuildContext context, L10n l10n, String errorMessage) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text(l10n.back),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(l10n.errorTitle),
+      content: Text(errorMessage),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 
   @override
@@ -48,7 +85,7 @@ class InjuryRegisterPageState extends State<InjuryRegisterPage>{
               style: ElevatedButton.styleFrom(
                 minimumSize: const Size.fromHeight(40), // fromHeight use double.infinity as width and 40 is the height
               ),
-              onPressed: () => _selectDate(context),
+              onPressed: () => _selectDate(context, l10n),
               child: const Text('Select date'),
             ),
           ],

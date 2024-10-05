@@ -5,6 +5,7 @@ import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/historyList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
 import 'package:bbfc_application/ui/profile.dart';
+import 'package:bbfc_application/ui/seniority.dart';
 import 'package:bbfc_application/ui/settings.dart';
 import 'package:bbfc_application/ui/trainingHistoryList.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
@@ -73,6 +74,14 @@ class MainMenu extends StatelessWidget {
     );
   }
 
+  void _navigateToSeniorityPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => SeniorityPage(actUser: actUser),
+      ),
+    );
+  }
+
   bool _isPlayerPermission(){
     if(actUser.roles == Permission.PLAYER){
       return true;
@@ -133,6 +142,12 @@ class MainMenu extends StatelessWidget {
                     child: Text(l10n.settings),
                     onPressed: (){
                       _navigateToSettings(context);
+                    },
+                  ),
+                  MaterialButton(
+                    child: Text(l10n.seniority),
+                    onPressed: (){
+                      _navigateToSeniorityPage(context);
                     },
                   ),
                 ],

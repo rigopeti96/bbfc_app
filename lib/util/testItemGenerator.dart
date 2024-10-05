@@ -22,6 +22,7 @@ class TestItemGenerator {
         assists: 1,
         injuredUntil: null,
         suspendedUntil: null,
+        matchPlayed: 20,
         ratings: {},
         playerStatus: Status.AVAILABLE
     );
@@ -45,6 +46,7 @@ class TestItemGenerator {
         assists: 1,
         injuredUntil: null,
         suspendedUntil: null,
+        matchPlayed: 104,
         ratings: {},
         playerStatus: Status.AVAILABLE
     );
@@ -68,6 +70,7 @@ class TestItemGenerator {
         assists: 1,
         injuredUntil: null,
         suspendedUntil: null,
+        matchPlayed: 174,
         ratings: {},
         playerStatus: Status.AVAILABLE
     );
@@ -91,6 +94,7 @@ class TestItemGenerator {
         assists: 1,
         injuredUntil: null,
         suspendedUntil: null,
+        matchPlayed: 83,
         ratings: {},
         playerStatus: Status.AVAILABLE
     );
