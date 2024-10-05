@@ -1,3 +1,4 @@
+import 'package:bbfc_application/entity/certificate.dart';
 import 'package:bbfc_application/entity/item.dart';
 import 'package:bbfc_application/entity/rating.dart';
 import 'package:bbfc_application/enum/status.dart';
@@ -14,6 +15,7 @@ class User extends Item{
   final String password;
   final String email;
   final Permission roles;
+  Certificate? certificate;
   int goals;
   int assists;
   DateTime? injuredUntil;
@@ -33,6 +35,7 @@ class User extends Item{
     required this.password,
     required this.email,
     required this.roles,
+    this.certificate,
     required this.goals,
     required this.assists,
     required this.injuredUntil,
@@ -54,6 +57,7 @@ class User extends Item{
       password: json['password'] as String,
       email: json['email'] as String,
       roles: json['roles'] as Permission,
+      certificate: json['certificate'] as Certificate,
       goals: json['goals'] as int,
       assists: json['assists'] as int,
       injuredUntil: json['injuredUntil'] as DateTime,

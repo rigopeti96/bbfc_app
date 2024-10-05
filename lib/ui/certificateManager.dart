@@ -18,7 +18,15 @@ class CertificateManagerPage extends StatefulWidget{
 class CertificateManagerState extends State<CertificateManagerPage>{
   final User actUser;
   final User visitedUser;
-  CertificateManagerState({required this.actUser, required this.visitedUser});
+  bool _hasUserCertificate = false;
+
+  CertificateManagerState({required this.actUser, required this.visitedUser}){
+    if(visitedUser.certificate != null){
+      _hasUserCertificate = true;
+    }
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -37,13 +45,28 @@ class CertificateManagerState extends State<CertificateManagerPage>{
               padding: const EdgeInsets.all(5), //apply padding to all four sides
               child: Text("${l10n.userNameTag}: ${visitedUser.username}"),
             ),
-            Padding(
-              padding: const EdgeInsets.all(5), //apply padding to all four sides
-              child: Text("${l10n.emailTag}: ${user.email}"),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(5), //apply padding to all four sides
-              child: Text("${l10n.emailTag}: rigopeti96@gmail.com"),
+            Visibility(
+              visible: _hasUserCertificate,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(5), //apply padding to all four sides
+                    child: Text("${l10n.emailTag}: ${visitedUser.certificate?.certificateNumber}"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5), //apply padding to all four sides
+                    child: Text("${l10n.emailTag}: ${visitedUser.certificate?.sportExamValidUntil}"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5), //apply padding to all four sides
+                    child: Text("${l10n.emailTag}: ${visitedUser.certificate?.sportExamSpaces}"),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5), //apply padding to all four sides
+                    child: Text("${l10n.emailTag}: ${visitedUser.certificate?.photoValidUntil}"),
+                  ),
+                ],
+              )
             ),
             Expanded(
               child: Align(
