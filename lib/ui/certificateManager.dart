@@ -71,12 +71,22 @@ class CertificateManagerState extends State<CertificateManagerPage>{
             Expanded(
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
-                child: MaterialButton(
-                  onPressed: (){
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(l10n.back),
-                ),
+                child: Column(
+                  children: [
+                    MaterialButton(
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(l10n.back),
+                    ),
+                    MaterialButton(
+                      onPressed: (){
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(l10n.back),
+                    ),
+                  ],
+                )
               ),
             ),
           ],

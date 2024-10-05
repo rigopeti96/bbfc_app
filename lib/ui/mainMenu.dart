@@ -1,6 +1,6 @@
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/permisson.dart';
-import 'package:bbfc_application/ui/eventCreator/eventCreator.dart';
+import 'package:bbfc_application/ui/eventCreator.dart';
 import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/historyList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
