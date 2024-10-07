@@ -6,22 +6,25 @@ import '../main.dart';
 
 class UserHandlingPage extends StatefulWidget{
   final User actUser;
-  const UserHandlingPage({super.key, required this.actUser});
+  List<String> userNameList = [];
+  UserHandlingPage({super.key, required this.actUser});
 
   @override
   UserHandlingPageState createState() {
-    return UserHandlingPageState(user: actUser);
+    return UserHandlingPageState(user: actUser, userNameList: userNameList);
   }
 }
 
 class UserHandlingPageState extends State<UserHandlingPage> {
   final User user;
   int _switchIndex = 0;
+  final nameController = TextEditingController();
   final addressCityController = TextEditingController();
   final addressController = TextEditingController();
   final zipController = TextEditingController();
+  final List<String> userNameList;
 
-  UserHandlingPageState({required this.user});
+  UserHandlingPageState({required this.user, required this.userNameList});
 
   bool _isNewPlayer(){
     return _switchIndex == 0;
@@ -59,8 +62,29 @@ class UserHandlingPageState extends State<UserHandlingPage> {
                   });
                 },
               ),
+              Visibility(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    children: [
+
+                    ],
+                  ),
+                )
+              ),
               Text(_getTitleString(l10n)),
               Text(l10n.fullNameTag),
+              Padding(
+                padding: const EdgeInsets.all(3), //apply padding to all four sides
+                child: TextField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                    hintText: l10n.fullNameTag,
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                ),
+              ),
               Text(l10n.createEventDate),
               Padding(
                 padding: const EdgeInsets.all(5), //apply padding to all four sides
