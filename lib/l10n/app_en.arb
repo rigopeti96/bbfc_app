@@ -70,6 +70,11 @@
     "description": "Button text, navigate to settings page",
     "context": "MainMenu"
   },
+  "userHandling": "User handling",
+  "@userHandling": {
+    "description": "Button text, navigate to user handling page",
+    "context": "MainMenu"
+  },
   "seniority": "Seniority",
   "@seniority": {
     "description": "Button text, navigate to seniority page",
@@ -299,6 +304,16 @@
   "@createExamPrize": {
     "description": "Prize tag",
     "context": "EventCreatorPage"
+  },
+  "createUser": "Create user",
+  "@createUser": {
+    "description": "Toggle button value",
+    "context": "UserHandlingPage"
+  },
+  "modifyUser": "Modify user",
+  "@modifyUser": {
+    "description": "Toggle button value",
+    "context": "UserHandlingPage"
   },
   "btnSelectDate": "Select date",
   "@btnSelectDate": {

@@ -14,6 +14,7 @@
   "history": "Korábbi események",
   "injury": "Sérülés bejelentő",
   "settings": "Beállítások",
+  "userHandling": "Tagok kezelése",
   "seniority": "Senioritás",
   "injuryEstimatedUntil": "Sérült státusz dátuma",
   "errorTitle": "Hiba!",
@@ -60,5 +61,7 @@
   "createMatchTypeValueCup": "Kupameccs",
   "createMatchTypeValueLeague": "Bajnokság",
   "createExamPrize": "Vizsgálat ára (Ft)",
+  "createUser": "Létrehozás",
+  "modifyUser": "Módosítás",
   "btnSelectDate": "Dátum választása"
 }
