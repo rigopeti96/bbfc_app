@@ -32,7 +32,7 @@ class CertificateManagerState extends State<CertificateManagerPage>{
   Widget build(BuildContext context) {
     final L10n l10n = L10n.of(context)!;
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.profile)),
+      appBar: AppBar(title: Text("${l10n.manageCertificate} - ${visitedUser.name}")),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -51,19 +51,19 @@ class CertificateManagerState extends State<CertificateManagerPage>{
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(5), //apply padding to all four sides
-                    child: Text("${l10n.emailTag}: ${visitedUser.certificate?.certificateNumber}"),
+                    child: Text("${l10n.certificateNumber}${visitedUser.certificate?.certificateNumber}"),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(5), //apply padding to all four sides
-                    child: Text("${l10n.emailTag}: ${visitedUser.certificate?.sportExamValidUntil}"),
+                    child: Text("${l10n.sportExamValidUntil}${visitedUser.certificate?.sportExamValidUntil}"),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(5), //apply padding to all four sides
-                    child: Text("${l10n.emailTag}: ${visitedUser.certificate?.sportExamSpaces}"),
+                    child: Text("${l10n.freeExamSpaces}${visitedUser.certificate?.sportExamSpaces}"),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(5), //apply padding to all four sides
-                    child: Text("${l10n.emailTag}: ${visitedUser.certificate?.photoValidUntil}"),
+                    child: Text("${l10n.photoValidUntil}${visitedUser.certificate?.photoValidUntil}"),
                   ),
                 ],
               )
@@ -71,23 +71,13 @@ class CertificateManagerState extends State<CertificateManagerPage>{
             Expanded(
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
-                child: Column(
-                  children: [
-                    MaterialButton(
-                      onPressed: (){
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(l10n.back),
-                    ),
-                    MaterialButton(
-                      onPressed: (){
-                        Navigator.of(context).pop();
-                      },
-                      child: Text(l10n.back),
-                    ),
-                  ],
-                )
-              ),
+                child: MaterialButton(
+                  onPressed: (){
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(l10n.back),
+                ),
+              )
             ),
           ],
         ),

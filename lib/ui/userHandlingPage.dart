@@ -2,6 +2,7 @@ import 'package:bbfc_application/entity/rating.dart';
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/exception/selectedDateIsInvalidException.dart';
 import 'package:bbfc_application/exception/userNotFoundExcepiton.dart';
+import 'package:bbfc_application/ui/certificateManager.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class UserHandlingPageState extends State<UserHandlingPage> {
   final Validator validator = Validator();
 
   UserHandlingPageState({required this.user, required this.userList}){
-    selectorValue = userList[0].name;
+    selectorValue = userList.first.name;
   }
 
   User _findSelectedUser(L10n l10n){
@@ -83,6 +84,17 @@ class UserHandlingPageState extends State<UserHandlingPage> {
         return l10n.suspended;
       case "Status.INJURED":
         return l10n.injured;
+    }
+  }
+
+  _fillTextFields(L10n l10n){
+    if(_isNewPlayer()){
+      User selectedUser = _findSelectedUser(l10n);
+      nameController.text = selectedUser.name;
+      birthPlaceController.text = selectedUser.birthPlace;
+      //addressCityController.text = selectedUser.
+      //addressController.text = selectedUser.
+      //zipController.text = selectedUser.
     }
   }
 
@@ -133,11 +145,19 @@ class UserHandlingPageState extends State<UserHandlingPage> {
     }
   }
 
+  void _navigateToCertificateManagerPage(BuildContext context, L10n l10n) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => CertificateManagerPage(actUser: user, visitedUser: _findSelectedUser(l10n)),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final L10n l10n = L10n.of(context)!;
     return Scaffold(
-        appBar: AppBar(title: Text(l10n.profile)),
+        appBar: AppBar(title: Text(l10n.userHandling)),
         body: Center(
           child: Column(
             children: [
@@ -155,6 +175,7 @@ class UserHandlingPageState extends State<UserHandlingPage> {
                   setState(() {
                     _switchIndex = index!;
                     selectorValue = userList[index].name;
+                    _fillTextFields(l10n);
                   });
                 },
               ),
@@ -226,7 +247,7 @@ class UserHandlingPageState extends State<UserHandlingPage> {
                   ),
                 ),
               ),
-              Text(l10n.createEventDate),
+              Text(l10n.address),
               Padding(
                 padding: const EdgeInsets.all(5), //apply padding to all four sides
                 child: Row(
@@ -294,12 +315,25 @@ class UserHandlingPageState extends State<UserHandlingPage> {
               Expanded(
                 child: Align(
                   alignment: FractionalOffset.bottomCenter,
-                  child: MaterialButton(
-                    onPressed: (){
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(_getTitleString(l10n)),
-                  ),
+                  child: Column(
+                    children: [
+                      MaterialButton(
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(_getTitleString(l10n)),
+                      ),
+                      Visibility(
+                        visible: !_isNewPlayer(),
+                        child: MaterialButton(
+                          onPressed: (){
+                            _navigateToCertificateManagerPage(context, l10n);
+                          },
+                          child: Text(l10n.manageCertificate),
+                        ),
+                      )
+                    ],
+                  )
                 ),
               ),
             ],

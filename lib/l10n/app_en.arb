@@ -335,6 +335,11 @@
     "description": "Hint text to create user, set place of birth",
     "context": "UserHandlingPage"
   },
+  "address": "Address",
+  "@address": {
+    "description": "Hint text to create user, set address",
+    "context": "UserHandlingPage"
+  },
   "numberOfGoals": "Number of goals: ",
   "@numberOfGoals": {
     "description": "Tag test to scored goals",
@@ -374,6 +379,31 @@
   "@suspended": {
     "description": "Enum value",
     "context": "UserHandlingPage"
+  },
+  "manageCertificate": "Manage Certificate",
+  "@manageCertificate": {
+    "description": "Button text to cert manager",
+    "context": "UserHandlingPage"
+  },
+  "certificateNumber": "Certificate number: ",
+  "@certificateNumber": {
+    "description": "Tag text to cert number",
+    "context": "CertificateManagerPage"
+  },
+  "photoValidUntil": "Photo valid until: ",
+  "@photoValidUntil": {
+    "description": "Tag text to photo validity",
+    "context": "CertificateManagerPage"
+  },
+  "sportExamValidUntil": "Sport medicine exam. valid until: ",
+  "@sportExamValidUntil": {
+    "description": "Tag text to Sport medicine exam. validity",
+    "context": "CertificateManagerPage"
+  },
+  "freeExamSpaces": "Sport medicine exam. spaces: ",
+  "@freeExamSpaces": {
+    "description": "Tag text to Sport medicine exam. spaces",
+    "context": "CertificateManagerPage"
   },
   "btnSelectDate": "Select date",
   "@btnSelectDate": {

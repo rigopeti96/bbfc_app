@@ -1,3 +1,4 @@
+import 'package:bbfc_application/entity/certificate.dart';
 import 'package:bbfc_application/entity/rating.dart';
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/permisson.dart';
@@ -96,9 +97,22 @@ class TestItemGenerator {
         suspendedUntil: null,
         matchPlayed: 83,
         ratings: {},
+        certificate: _createCertificate(),
         playerStatus: Status.AVAILABLE
     );
 
     return user;
+  }
+
+  Certificate _createCertificate(){
+    return Certificate(
+        id: const Uuid().v4(),
+        modifyDate: DateTime.now(),
+        modifyUser: createCreatorUser(),
+        certificateNumber: 33217240,
+        photoValidUntil: DateTime(2028, 07, 31),
+        sportExamValidUntil: DateTime(2025, 06, 30),
+        sportExamSpaces: 2
+    );
   }
 }
