@@ -25,6 +25,14 @@ class Validator {
     return true;
   }
 
+  bool validateSelectedBirthDate(DateTime picked, L10n l10n){
+    if(picked.isAfter(DateTime.now())){
+      throw SelectedDateIsInvalidException(l10n.selectedBirthDateIsInvalidExceptionMessage);
+    }
+
+    return true;
+  }
+
   bool validatePasswordChange(String actPassword, String oldPassword, String newPassword, String newPasswordConf, L10n l10n){
     if(actPassword != oldPassword){
       throw PasswordNotMatchException(l10n.oldAndNewPasswordNotMatchExceptionMessage);

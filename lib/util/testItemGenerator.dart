@@ -42,13 +42,13 @@ class TestItemGenerator {
         password: "a",
         email: "applied1@us.er",
         roles: Permission.ADMIN,
-        goals: 2,
-        assists: 1,
-        injuredUntil: null,
+        goals: 0,
+        assists: 5,
+        injuredUntil: DateTime(2024, 11, 20),
         suspendedUntil: null,
         matchPlayed: 104,
         ratings: {},
-        playerStatus: Status.AVAILABLE
+        playerStatus: Status.INJURED
     );
 
     return user;
@@ -64,15 +64,15 @@ class TestItemGenerator {
         birthPlace: "Heringespuszta",
         username: "AppliedUser2",
         password: "a",
-        email: "creator@us.er",
+        email: "applied2@us.er",
         roles: Permission.ADMIN,
         goals: 2,
-        assists: 1,
+        assists: 3,
         injuredUntil: null,
-        suspendedUntil: null,
+        suspendedUntil: DateTime(2024, 10, 31),
         matchPlayed: 174,
         ratings: {},
-        playerStatus: Status.AVAILABLE
+        playerStatus: Status.SUSPENDED
     );
 
     return user;
@@ -82,15 +82,15 @@ class TestItemGenerator {
     User user = User(
         id: const Uuid().v4(),
         modifyDate: DateTime.now(),
-        name: "Applied User 2",
+        name: "Applied User 3",
         phoneNumber: "+36203917383",
         birthDay: DateTime(1990, 06, 20),
         birthPlace: "Bivalybasznád",
-        username: "AppliedUser2",
+        username: "AppliedUser3",
         password: "a",
-        email: "creator@us.er",
+        email: "applied3@us.er",
         roles: Permission.ADMIN,
-        goals: 2,
+        goals: 6,
         assists: 1,
         injuredUntil: null,
         suspendedUntil: null,
