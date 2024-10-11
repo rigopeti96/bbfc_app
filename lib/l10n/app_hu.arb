@@ -81,5 +81,6 @@
   "photoValidUntil": "Fotó érvényesség: ",
   "sportExamValidUntil": "Sportorvosi érvényesség: ",
   "freeExamSpaces": "Szabad pecséthelyek száma: ",
-  "btnSelectDate": "Dátum választása"
+  "btnSelectDate": "Dátum választása",
+  "btnSelectToday": "Mai nap"
 }

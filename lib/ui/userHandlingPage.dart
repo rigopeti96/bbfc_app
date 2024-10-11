@@ -92,9 +92,6 @@ class UserHandlingPageState extends State<UserHandlingPage> {
       User selectedUser = _findSelectedUser(l10n);
       nameController.text = selectedUser.name;
       birthPlaceController.text = selectedUser.birthPlace;
-      //addressCityController.text = selectedUser.
-      //addressController.text = selectedUser.
-      //zipController.text = selectedUser.
     }
   }
 
@@ -315,24 +312,14 @@ class UserHandlingPageState extends State<UserHandlingPage> {
               Expanded(
                 child: Align(
                   alignment: FractionalOffset.bottomCenter,
-                  child: Column(
-                    children: [
-                      MaterialButton(
-                        onPressed: (){
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(_getTitleString(l10n)),
-                      ),
-                      Visibility(
-                        visible: !_isNewPlayer(),
-                        child: MaterialButton(
-                          onPressed: (){
-                            _navigateToCertificateManagerPage(context, l10n);
-                          },
-                          child: Text(l10n.manageCertificate),
-                        ),
-                      )
-                    ],
+                  child: Visibility(
+                    visible: !_isNewPlayer(),
+                    child: MaterialButton(
+                      onPressed: (){
+                        _navigateToCertificateManagerPage(context, l10n);
+                      },
+                      child: Text(l10n.manageCertificate),
+                    ),
                   )
                 ),
               ),

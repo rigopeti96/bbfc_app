@@ -409,5 +409,10 @@
   "@btnSelectDate": {
     "description": "Select date button text",
     "context": "Application"
+  },
+  "btnSelectToday": "Today",
+  "@btnSelectToday": {
+    "description": "Select date as today button text",
+    "context": "Application"
   }
 }
