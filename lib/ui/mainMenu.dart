@@ -1,6 +1,6 @@
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/permisson.dart';
-import 'package:bbfc_application/ui/eventCreator/eventCreator.dart';
+import 'package:bbfc_application/ui/eventCreator.dart';
 import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/historyList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
@@ -8,6 +8,7 @@ import 'package:bbfc_application/ui/profile.dart';
 import 'package:bbfc_application/ui/seniority.dart';
 import 'package:bbfc_application/ui/settings.dart';
 import 'package:bbfc_application/ui/trainingHistoryList.dart';
+import 'package:bbfc_application/ui/userHandlingPage.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/l10n.dart';
@@ -74,6 +75,14 @@ class MainMenu extends StatelessWidget {
     );
   }
 
+  void _navigateToUserHandlingPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => UserHandlingPage(actUser: actUser),
+      ),
+    );
+  }
+
   void _navigateToSeniorityPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
@@ -129,6 +138,15 @@ class MainMenu extends StatelessWidget {
                       child: Text(l10n.createEventTitle),
                       onPressed: (){
                         _navigateToEventCreatorHub(context);
+                      },
+                    ),
+                  ),
+                  Visibility(
+                    visible: !_isPlayerPermission(),
+                    child: MaterialButton(
+                      child: Text(l10n.userHandling),
+                      onPressed: (){
+                        _navigateToUserHandlingPage(context);
                       },
                     ),
                   ),

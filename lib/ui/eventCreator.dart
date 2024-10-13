@@ -172,22 +172,28 @@ class EventCreatorPageState extends State<EventCreatorPage>{
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Flexible(
-                    child: TextField(
-                      controller: zipController,
-                      decoration: InputDecoration(
-                        hintText: l10n.createEventZipTag,
-                        filled: true,
-                        fillColor: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(3), //apply padding to all four sides
+                      child: TextField(
+                        controller: zipController,
+                        decoration: InputDecoration(
+                          hintText: l10n.createEventZipTag,
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
                       ),
                     ),
                   ),
                   Flexible(
-                    child: TextField(
-                      controller: addressCityController,
-                      decoration: InputDecoration(
-                        hintText: l10n.createEventAddressCityTag,
-                        filled: true,
-                        fillColor: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(3), //apply padding to all four sides
+                      child: TextField(
+                        controller: addressCityController,
+                        decoration: InputDecoration(
+                          hintText: l10n.createEventAddressCityTag,
+                          filled: true,
+                          fillColor: Colors.white,
+                        ),
                       ),
                     ),
                   ),

@@ -70,6 +70,11 @@
     "description": "Button text, navigate to settings page",
     "context": "MainMenu"
   },
+  "userHandling": "User handling",
+  "@userHandling": {
+    "description": "Button text, navigate to user handling page",
+    "context": "MainMenu"
+  },
   "seniority": "Seniority",
   "@seniority": {
     "description": "Button text, navigate to seniority page",
@@ -117,7 +122,7 @@
   },
   "okButtonText": "OK",
   "@okButtonText": {
-    "description": "Text for OK buttons",
+  "description": "Text for OK buttons",
     "context": "Application"
   },
   "oldAndNewPasswordNotMatchExceptionMessage": "Given password does not match with your password!",
@@ -144,6 +149,16 @@
   "@selectedDateIsInvalidExceptionMessage": {
     "description": "Exception message to show training plan is empty",
     "context": "TrainingHistoryDataPage"
+  },
+  "selectedBirthDateIsInvalidExceptionMessage": "The selected birth date cannot be later than the current date!",
+  "@selectedBirthDateIsInvalidExceptionMessage": {
+    "description": "Exception message to show birth date cannot be later",
+    "context": "UserHandlingPage"
+  },
+  "userNotFoundExceptionMessage": "User has been not found!",
+  "@userNotFoundExceptionMessage": {
+    "description": "Exception message to show user has not been found",
+    "context": "UserHandlingPage"
   },
   "training": "Training",
   "@training": {
@@ -300,9 +315,109 @@
     "description": "Prize tag",
     "context": "EventCreatorPage"
   },
+  "createUser": "Create user",
+  "@createUser": {
+    "description": "Toggle button value",
+    "context": "UserHandlingPage"
+  },
+  "modifyUser": "Modify user",
+  "@modifyUser": {
+    "description": "Toggle button value",
+    "context": "UserHandlingPage"
+  },
+  "birthDateAndPlace": "Date and place of birth",
+  "@birthDateAndPlace": {
+    "description": "Separator text to create user",
+    "context": "UserHandlingPage"
+  },
+  "birthPlaceHint": "Place of birth",
+  "@birthPlaceHint": {
+    "description": "Hint text to create user, set place of birth",
+    "context": "UserHandlingPage"
+  },
+  "address": "Address",
+  "@address": {
+    "description": "Hint text to create user, set address",
+    "context": "UserHandlingPage"
+  },
+  "numberOfGoals": "Number of goals: ",
+  "@numberOfGoals": {
+    "description": "Tag test to scored goals",
+    "context": "UserHandlingPage"
+  },
+  "numberOfAssists": "Number of assists: ",
+  "@numberOfAssists": {
+    "description": "Tag test to provided goals",
+    "context": "UserHandlingPage"
+  },
+  "playerStatus": "Player's status: ",
+  "@playerStatus": {
+    "description": "Tag to show the status of the player",
+    "context": "UserHandlingPage"
+  },
+  "suspendedUntil": "Suspended until: ",
+  "@suspendedUntil": {
+    "description": "Tag to show the deadline of suspended status",
+    "context": "UserHandlingPage"
+  },
+  "injuredUntil": "Injured until: ",
+  "@injuredUntil": {
+    "description": "Tag to show the deadline of injured status",
+    "context": "UserHandlingPage"
+  },
+  "available": "Available",
+  "@available": {
+    "description": "Enum value",
+    "context": "UserHandlingPage"
+  },
+  "injured": "Injured",
+  "@injured": {
+    "description": "Enum value",
+    "context": "UserHandlingPage"
+  },
+  "suspended": "Suspended",
+  "@suspended": {
+    "description": "Enum value",
+    "context": "UserHandlingPage"
+  },
+  "manageCertificate": "Manage Certificate",
+  "@manageCertificate": {
+    "description": "Button text to cert manager",
+    "context": "UserHandlingPage"
+  },
+  "certificateNumber": "Certificate number: ",
+  "@certificateNumber": {
+    "description": "Tag text to cert number",
+    "context": "CertificateManagerPage"
+  },
+  "photoValidUntil": "Photo valid until: ",
+  "@photoValidUntil": {
+    "description": "Tag text to photo validity",
+    "context": "CertificateManagerPage"
+  },
+  "sportExamValidUntil": "Sport medicine exam. valid until: ",
+  "@sportExamValidUntil": {
+    "description": "Tag text to Sport medicine exam. validity",
+    "context": "CertificateManagerPage"
+  },
+  "freeExamSpaces": "Sport medicine exam. spaces: ",
+  "@freeExamSpaces": {
+    "description": "Tag text to Sport medicine exam. spaces",
+    "context": "CertificateManagerPage"
+  },
+  "newCertDateValues": "Modification summary",
+  "@newCertDateValues": {
+    "description": "Separator title text",
+    "context": "CertificateManagerPage"
+  },
   "btnSelectDate": "Select date",
   "@btnSelectDate": {
     "description": "Select date button text",
+    "context": "Application"
+  },
+  "btnSelectToday": "Today",
+  "@btnSelectToday": {
+    "description": "Select date as today button text",
     "context": "Application"
   }
 }
