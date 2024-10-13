@@ -82,5 +82,6 @@
   "sportExamValidUntil": "Sportorvosi érvényesség: ",
   "freeExamSpaces": "Szabad pecséthelyek száma: ",
   "btnSelectDate": "Dátum választása",
-  "btnSelectToday": "Mai nap"
+  "btnSelectToday": "Mai nap",
+  "newCertDateValues": "Változtatások"
 }

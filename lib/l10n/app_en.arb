@@ -405,6 +405,11 @@
     "description": "Tag text to Sport medicine exam. spaces",
     "context": "CertificateManagerPage"
   },
+  "newCertDateValues": "Modification summary",
+  "@newCertDateValues": {
+    "description": "Separator title text",
+    "context": "CertificateManagerPage"
+  },
   "btnSelectDate": "Select date",
   "@btnSelectDate": {
     "description": "Select date button text",

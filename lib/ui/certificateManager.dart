@@ -27,6 +27,10 @@ class CertificateManagerState extends State<CertificateManagerPage>{
   CertificateManagerState({required this.actUser, required this.visitedUser}){
     if(visitedUser.certificate != null){
       _hasUserCertificate = true;
+      if(visitedUser.certificate != null){
+        _newPhotoValidity = visitedUser.certificate!.photoValidUntil;
+        _newSportExamValidity = visitedUser.certificate!.sportExamValidUntil;
+      }
     }
   }
 
@@ -97,6 +101,10 @@ class CertificateManagerState extends State<CertificateManagerPage>{
     );
   }
 
+  bool _isDateModified(){
+    return _newSportExamValidity != visitedUser.certificate?.sportExamValidUntil || _newPhotoValidity != visitedUser.certificate?.photoValidUntil;
+  }
+
   @override
   Widget build(BuildContext context) {
     final L10n l10n = L10n.of(context)!;
@@ -128,11 +136,19 @@ class CertificateManagerState extends State<CertificateManagerPage>{
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size.square(40), // fromHeight use double.infinity as width and 40 is the height
                           ),
-                          onPressed: () => _selectPhotoValidityDate(context, l10n),
+                          onPressed: (){
+                            setState(() {
+                              _selectPhotoValidityDate(context, l10n);
+                            });
+                          },
                           child: Text(l10n.btnSelectDate),
                         ),
                         ElevatedButton(
-                          onPressed: () => _newPhotoValidity = DateTime.now(),
+                          onPressed: (){
+                            setState(() {
+                              _newPhotoValidity = DateTime(DateTime.now().year + 1, DateTime.now().month, DateTime.now().day);
+                            });
+                          },
                           child: Text(l10n.btnSelectToday)
                         )
                       ],
@@ -142,7 +158,7 @@ class CertificateManagerState extends State<CertificateManagerPage>{
                     padding: const EdgeInsets.all(5), //apply padding to all four sides
                     child: Column(
                       children: [
-                        Text("${l10n.photoValidUntil}${visitedUser.certificate?.photoValidUntil}"),
+                        Text("${l10n.sportExamValidUntil}${visitedUser.certificate?.sportExamValidUntil}"),
                         Align(
                           alignment: Alignment.bottomCenter,
                           child: Row(
@@ -152,11 +168,19 @@ class CertificateManagerState extends State<CertificateManagerPage>{
                                 style: ElevatedButton.styleFrom(
                                   minimumSize: const Size.square(40), // fromHeight use double.infinity as width and 40 is the height
                                 ),
-                                onPressed: () => _selectPhotoValidityDate(context, l10n),
+                                onPressed: (){
+                                  setState(() {
+                                    _selectExamValidityDate(context, l10n);
+                                  });
+                                },
                                 child: Text(l10n.btnSelectDate),
                               ),
                               ElevatedButton(
-                                onPressed: () => _newPhotoValidity = DateTime.now(),
+                                  onPressed: (){
+                                    setState(() {
+                                      _newSportExamValidity = DateTime(DateTime.now().year + 1, DateTime.now().month, DateTime.now().day);
+                                    });
+                                  },
                                 child: Text(l10n.btnSelectToday)
                               )
                             ],
@@ -169,20 +193,57 @@ class CertificateManagerState extends State<CertificateManagerPage>{
                     padding: const EdgeInsets.all(5), //apply padding to all four sides
                     child: Text("${l10n.freeExamSpaces}${visitedUser.certificate?.sportExamSpaces}"),
                   ),
+                  const Divider(
+                      color: Colors.black
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5), //apply padding to all four sides
+                    child: Text(
+                      l10n.newCertDateValues,
+                      style: const TextStyle(
+                        fontSize: 20.0
+                      ),
+                    ),
+                  ),
                 ],
               )
             ),
-            Expanded(
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Visibility(
+                visible: _isDateModified(),
+                  child: Column(
+                    children: [
+                      Text("${l10n.photoValidUntil} $_newPhotoValidity"),
+                      Text("${l10n.sportExamValidUntil}$_newSportExamValidity")
+                    ],
+                  )
+              ),
+            ),
+            /*Expanded(
               child: Align(
                 alignment: FractionalOffset.bottomCenter,
                 child: MaterialButton(
                   onPressed: (){
+                    //TODO: implement save method when backend is connected
                     Navigator.of(context).pop();
                   },
-                  child: Text(l10n.back),
-                ),
+                  child: Text(l10n.saveButtonText),
+                )
               )
-            ),
+            ),*/
+            Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: MaterialButton(
+                    onPressed: (){
+                      //TODO: implement save method when backend is connected
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(l10n.saveButtonText),
+                  )
+                )
+            )
           ],
         ),
       ),
