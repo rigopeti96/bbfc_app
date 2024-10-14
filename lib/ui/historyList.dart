@@ -3,8 +3,10 @@ import 'package:bbfc_application/entity/training.dart';
 import 'package:bbfc_application/entity/match.dart';
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/matchType.dart';
+import 'package:bbfc_application/enum/permisson.dart';
 import 'package:bbfc_application/enum/pitchSelector.dart';
 import 'package:bbfc_application/ui/eventApplication.dart';
+import 'package:bbfc_application/ui/matchReport.dart';
 import 'package:bbfc_application/ui/rateTeammates.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:flutter/material.dart';
@@ -51,10 +53,26 @@ class HistoryListState extends State<HistoryListPage>{
     );
   }
 
+  void _navigateToMatchReportPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MatchReportPage(actUser: actUser),
+      ),
+    );
+  }
+
   void onTapGesture(item) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("$item is selected"),
     ));
+  }
+
+  bool _isPlayerPermission(){
+    if(actUser.roles == Permission.PLAYER){
+      return true;
+    }
+
+    return false;
   }
 
   @override
@@ -82,6 +100,15 @@ class HistoryListState extends State<HistoryListPage>{
                               ""
                           )),
                         ],
+                      ),
+                      Visibility(
+                        visible: !_isPlayerPermission(),
+                        child: MaterialButton(
+                          child: Text(l10n.matchReport),
+                          onPressed: (){
+                            _navigateToMatchReportPage(context);
+                          },
+                        ),
                       ),
                       IconButton(
                         icon: const Icon(Icons.navigate_next),
