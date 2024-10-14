@@ -82,7 +82,9 @@
   "photoValidUntil": "Fotó érvényesség: ",
   "sportExamValidUntil": "Sportorvosi érvényesség: ",
   "freeExamSpaces": "Szabad pecséthelyek száma: ",
+  "newCertDateValues": "Változtatások",
+  "goalNumber": "Gólszám",
   "btnSelectDate": "Dátum választása",
   "btnSelectToday": "Mai nap",
-  "newCertDateValues": "Változtatások"
+  "btnAddGoalScorer": "Gólszerző(k) megadása"
 }

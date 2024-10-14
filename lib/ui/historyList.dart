@@ -53,10 +53,10 @@ class HistoryListState extends State<HistoryListPage>{
     );
   }
 
-  void _navigateToMatchReportPage(BuildContext context) {
+  void _navigateToMatchReportPage(BuildContext context, Match actMatch) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MatchReportPage(actUser: actUser),
+        builder: (context) => MatchReportPage(actUser: actUser, actMatch: actMatch),
       ),
     );
   }
@@ -101,14 +101,11 @@ class HistoryListState extends State<HistoryListPage>{
                           )),
                         ],
                       ),
-                      Visibility(
-                        visible: !_isPlayerPermission(),
-                        child: MaterialButton(
-                          child: Text(l10n.matchReport),
-                          onPressed: (){
-                            _navigateToMatchReportPage(context);
-                          },
-                        ),
+                      MaterialButton(
+                        child: Text(l10n.matchReport),
+                        onPressed: (){
+                          _navigateToMatchReportPage(context, eventList[index]);
+                        },
                       ),
                       IconButton(
                         icon: const Icon(Icons.navigate_next),
