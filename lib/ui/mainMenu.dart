@@ -4,6 +4,7 @@ import 'package:bbfc_application/ui/eventCreator.dart';
 import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/historyList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
+import 'package:bbfc_application/ui/matchReport.dart';
 import 'package:bbfc_application/ui/profile.dart';
 import 'package:bbfc_application/ui/seniority.dart';
 import 'package:bbfc_application/ui/settings.dart';
@@ -91,6 +92,14 @@ class MainMenu extends StatelessWidget {
     );
   }
 
+  void _navigateToMatchReportPage(BuildContext context) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => MatchReportPage(actUser: actUser),
+      ),
+    );
+  }
+
   bool _isPlayerPermission(){
     if(actUser.roles == Permission.PLAYER){
       return true;
@@ -138,6 +147,15 @@ class MainMenu extends StatelessWidget {
                       child: Text(l10n.createEventTitle),
                       onPressed: (){
                         _navigateToEventCreatorHub(context);
+                      },
+                    ),
+                  ),
+                  Visibility(
+                    visible: !_isPlayerPermission(),
+                    child: MaterialButton(
+                      child: Text(l10n.matchReport),
+                      onPressed: (){
+                        _navigateToMatchReportPage(context);
                       },
                     ),
                   ),
