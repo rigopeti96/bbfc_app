@@ -6,13 +6,15 @@ class MatchReportItem extends Item {
   final MatchReportItemType matchReportItemType;
   final int minutes;
   final User user;
+  final User? assistUser;
 
   MatchReportItem({
     super.id,
     required super.modifyDate,
     required this.matchReportItemType,
     required this.minutes,
-    required this.user
+    required this.user,
+    this.assistUser
   });
 
   factory MatchReportItem.fromJson(Map<String, dynamic> json) {
@@ -21,7 +23,8 @@ class MatchReportItem extends Item {
       modifyDate: json['modifyDate'] as DateTime,
       matchReportItemType: json['matchReportItemType'] as MatchReportItemType,
       minutes: json['minutes'] as int,
-      user: json['user'] as User
+      user: json['user'] as User,
+      assistUser: json['assistUser'] as User
     );
   }
 }

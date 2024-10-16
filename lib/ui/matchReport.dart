@@ -21,6 +21,7 @@ class MatchReportPageState extends State<MatchReportPage> {
   final User actUser;
   final Match actMatch;
   late final List<User> registeredUserList;
+  final List<String> _reportTypes = ["yellow_card", "red_card", "goal"];
   final List<MatchReportItem> reportItems = [];
   final TestItemGenerator _generator = TestItemGenerator();
   int value = 0;
@@ -44,6 +45,42 @@ class MatchReportPageState extends State<MatchReportPage> {
     });
   }
 
+  _buildReportItemRegister(int index, L10n l10n){
+    return Dialog(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          TextField(
+            obscureText: true,
+            decoration: InputDecoration(hintText: l10n.passwordTag),
+
+          ),
+          TextField(
+            obscureText: true,
+            decoration: InputDecoration(hintText: l10n.newPasswordTag),
+
+          ),
+          TextField(
+            obscureText: true,
+            decoration: InputDecoration(hintText: l10n.newPasswordConfTag),
+
+          ),
+          TextButton(
+            child: Text(l10n.saveButtonText),
+            onPressed: (){
+              _saveMatchReportItem();
+            },
+          )
+        ],
+      ),
+
+    );
+  }
+
+  _saveMatchReportItem(){
+
+  }
+
   _buildRow(int index) {
     return Card(
       child: Padding(
@@ -58,10 +95,8 @@ class MatchReportPageState extends State<MatchReportPage> {
     );
   }
 
-  void onTapGesture(item, context) {
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("$item is selected"),
-    ));
+  void onTapGesture(index, L10n l10n) {
+    _buildReportItemRegister(index, l10n);
   }
 
   bool _isPageReadOnly(){
@@ -136,7 +171,7 @@ class MatchReportPageState extends State<MatchReportPage> {
               itemBuilder: (context, index) {
                 return GestureDetector(
                   child: _buildRow(index),
-                  onTap: () => onTapGesture(registeredUserList[index], context),
+                  onTap: () => onTapGesture(index, l10n),
               );
             }
           ),
