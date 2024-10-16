@@ -1,6 +1,8 @@
+import 'package:bbfc_application/entity/matchReportItem.dart';
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/permisson.dart';
 import 'package:bbfc_application/enum/pitchSelector.dart';
+import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:bbfc_application/entity/match.dart';
 
@@ -18,10 +20,19 @@ class MatchReportPage extends StatefulWidget {
 class MatchReportPageState extends State<MatchReportPage> {
   final User actUser;
   final Match actMatch;
-  MatchReportPageState({required this.actUser, required this.actMatch});
+  late final List<User> registeredUserList;
+  final List<MatchReportItem> reportItems = [];
+  final TestItemGenerator _generator = TestItemGenerator();
   int value = 0;
   final _homeGoalsController = TextEditingController();
   final _awayGoalsController = TextEditingController();
+
+  MatchReportPageState({required this.actUser, required this.actMatch}){
+    registeredUserList = [];
+    registeredUserList.add(_generator.createAppliedUser1());
+    registeredUserList.add(_generator.createAppliedUser2());
+    registeredUserList.add(_generator.createAppliedUser3());
+  }
 
   _addItem() {
     setState(() {
@@ -34,7 +45,23 @@ class MatchReportPageState extends State<MatchReportPage> {
   }
 
   _buildRow(int index) {
-    return Text("Item " + index.toString());
+    return Card(
+      child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("${index+1}."),
+            ],
+          )
+      ),
+    );
+  }
+
+  void onTapGesture(item, context) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("$item is selected"),
+    ));
   }
 
   bool _isPageReadOnly(){
@@ -101,11 +128,17 @@ class MatchReportPageState extends State<MatchReportPage> {
             onPressed: _addItem,
             child: Text(l10n.btnAddGoalScorer)
           ),
+
           ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
               itemCount: this.value,
-              itemBuilder: (context, index) => this._buildRow(index)
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  child: _buildRow(index),
+                  onTap: () => onTapGesture(registeredUserList[index], context),
+              );
+            }
           ),
         ],
       ),
