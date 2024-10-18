@@ -1,4 +1,5 @@
 import 'package:bbfc_application/entity/user.dart';
+import 'package:bbfc_application/enum/enumTranslator.dart';
 import 'package:bbfc_application/exception/selectedDateIsInvalidException.dart';
 import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/historyList.dart';
@@ -44,27 +45,7 @@ class EventCreatorPageState extends State<EventCreatorPage>{
   final pitchNameController = TextEditingController();
   final prizeController = TextEditingController();
   final durationController = TextEditingController();
-
-  String _getL10nValue(String label, L10n l10n){
-    switch(label){
-      case "Training":
-        return l10n.training;
-      case "Match":
-        return l10n.match;
-      case "SportsMedicineExamination":
-        return l10n.sportsMedicineExamination;
-      case "Home":
-        return l10n.createEventSelectorValueHome;
-      case "Away":
-        return l10n.createEventSelectorValueAway;
-      case "Cup":
-        return l10n.createMatchTypeValueCup;
-      case "League":
-        return l10n.createMatchTypeValueLeague;
-    }
-
-    return "";
-  }
+  final EnumTranslator _translator = EnumTranslator();
 
   Future<void> _selectDate(BuildContext context, L10n l10n) async {
     final DateTime? picked = await showDatePicker(
@@ -147,7 +128,7 @@ class EventCreatorPageState extends State<EventCreatorPage>{
               items: eventTypeList.map<DropdownMenuItem<String>>((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
-                  child: Text(_getL10nValue(value, l10n)),
+                  child: Text(_translator.translate(value, l10n)),
                 );
               }).toList(),
             ),
@@ -265,7 +246,7 @@ class EventCreatorPageState extends State<EventCreatorPage>{
                     items: selectorList.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(_getL10nValue(value, l10n)),
+                        child: Text(_translator.translate(value, l10n)),
                       );
                     }).toList(),
                   ),
@@ -287,7 +268,7 @@ class EventCreatorPageState extends State<EventCreatorPage>{
                     items: matchTypeList.map<DropdownMenuItem<String>>((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(_getL10nValue(value, l10n)),
+                        child: Text(_translator.translate(value, l10n)),
                       );
                     }).toList(),
                   ),

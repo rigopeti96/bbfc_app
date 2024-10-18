@@ -1,5 +1,7 @@
 import 'package:bbfc_application/entity/matchReportItem.dart';
 import 'package:bbfc_application/entity/user.dart';
+import 'package:bbfc_application/enum/enumTranslator.dart';
+import 'package:bbfc_application/enum/matchReportItemType.dart';
 import 'package:bbfc_application/enum/permisson.dart';
 import 'package:bbfc_application/enum/pitchSelector.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
@@ -21,12 +23,13 @@ class MatchReportPageState extends State<MatchReportPage> {
   final User actUser;
   final Match actMatch;
   late final List<User> registeredUserList;
-  final List<String> _reportTypes = ["yellow_card", "red_card", "goal"];
+  final List<MatchReportItemType> _reportTypes = [MatchReportItemType.YELLOW_CARD, MatchReportItemType.RED_CARD, MatchReportItemType.GOAL];
   final List<MatchReportItem> reportItems = [];
   final TestItemGenerator _generator = TestItemGenerator();
   int value = 0;
   final _homeGoalsController = TextEditingController();
   final _awayGoalsController = TextEditingController();
+  final EnumTranslator _translator = EnumTranslator();
 
   MatchReportPageState({required this.actUser, required this.actMatch}){
     registeredUserList = [];
@@ -45,15 +48,48 @@ class MatchReportPageState extends State<MatchReportPage> {
     });
   }
 
+  _createReportItem(MatchReportItemType matchReportItemType, int minutes, String userName, String? assist){
+    MatchReportItem item = MatchReportItem(
+        modifyDate: DateTime.now(),
+        matchReportItemType: matchReportItemType,
+        minutes: minutes,
+        user: userName
+    );
+
+    if(assist != null){
+      item.assistUser = assist;
+    }
+
+    reportItems.add(item);
+  }
+
   _buildReportItemRegister(int index, L10n l10n){
+    String? reportType;
     return Dialog(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          TextField(
-            obscureText: true,
-            decoration: InputDecoration(hintText: l10n.passwordTag),
-
+          DropdownButton<String>(
+            value: _translator.translate(_reportTypes.first.toString(), l10n),
+            icon: const Icon(Icons.arrow_downward),
+            elevation: 16,
+            style: const TextStyle(color: Colors.deepPurple),
+            underline: Container(
+              height: 2,
+              color: Colors.deepPurpleAccent,
+            ),
+            onChanged: (String? value) {
+              // This is called when the user selects an item.
+              setState(() {
+                reportType = value;
+              });
+            },
+            items: _reportTypes.map<DropdownMenuItem<String>>((MatchReportItemType value) {
+              return DropdownMenuItem<String>(
+                value: value.toString(),
+                child: Text(_translator.translate(value.toString(), l10n)),
+              );
+            }).toList(),
           ),
           TextField(
             obscureText: true,
@@ -66,9 +102,9 @@ class MatchReportPageState extends State<MatchReportPage> {
 
           ),
           TextButton(
-            child: Text(l10n.saveButtonText),
+            child: Text(l10n.btnSaveItem),
             onPressed: (){
-              _saveMatchReportItem();
+              //_createReportItem();
             },
           )
         ],
@@ -163,11 +199,10 @@ class MatchReportPageState extends State<MatchReportPage> {
             onPressed: _addItem,
             child: Text(l10n.btnAddGoalScorer)
           ),
-
           ListView.builder(
               scrollDirection: Axis.vertical,
               shrinkWrap: true,
-              itemCount: this.value,
+              itemCount: value,
               itemBuilder: (context, index) {
                 return GestureDetector(
                   child: _buildRow(index),

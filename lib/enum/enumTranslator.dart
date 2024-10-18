@@ -17,15 +17,12 @@ class EnumTranslator {
         return l10n.createMatchTypeValueCup;
       case "League":
         return l10n.createMatchTypeValueLeague;
-      case "Yellow_card":
-        //TODO: translate change return value
-        break;
-      case "Red_card":
-        //TODO: translate change return value
-        break;
-      case "Goal":
-        //TODO: translate change return value
-        break;
+      case "MatchReportItemType.YELLOW_CARD":
+        return l10n.yellowCard;
+      case "MatchReportItemType.RED_CARD":
+        return l10n.redCard;
+      case "MatchReportItemType.GOAL":
+        return l10n.goal;
     }
 
     return "";

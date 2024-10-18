@@ -84,7 +84,11 @@
   "freeExamSpaces": "Szabad pecséthelyek száma: ",
   "newCertDateValues": "Változtatások",
   "goalNumber": "Gólszám",
+  "goal": "Gól",
+  "yellowCard": "Sárga lap",
+  "redCard": "Piros lap",
   "btnSelectDate": "Dátum választása",
   "btnSelectToday": "Mai nap",
-  "btnAddGoalScorer": "Gólszerző(k) megadása"
+  "btnAddGoalScorer": "Gólszerző(k) megadása",
+  "btnSaveItem": "Save report item"
 }
