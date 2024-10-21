@@ -10,6 +10,8 @@ import 'package:bbfc_application/entity/match.dart';
 
 import '../main.dart';
 
+
+
 class MatchReportPage extends StatefulWidget {
   final User actUser;
   final Match actMatch;
@@ -30,6 +32,8 @@ class MatchReportPageState extends State<MatchReportPage> {
   final _homeGoalsController = TextEditingController();
   final _awayGoalsController = TextEditingController();
   final EnumTranslator _translator = EnumTranslator();
+
+  final List<MatchReportItemType> _reportItemTypes = [MatchReportItemType.RED_CARD, MatchReportItemType.YELLOW_CARD];
 
   MatchReportPageState({required this.actUser, required this.actMatch}){
     registeredUserList = [];
