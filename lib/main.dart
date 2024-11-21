@@ -1,12 +1,19 @@
+import 'dart:convert';
+
 import 'package:bbfc_application/entity/user.dart';
+import 'package:bbfc_application/exception/loginFailedException.dart';
+import 'package:bbfc_application/network/dao/logindataresponse.dart';
 import 'package:bbfc_application/ui/mainMenu.dart';
 import 'package:bbfc_application/exception/loginFieldIsEmptyException.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'gen_l10n/l10n.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
+String jwtToken = "";
+String userName = "";
 
 void main() {
   runApp(const MyApp());
@@ -36,14 +43,41 @@ class MyHomePage extends StatelessWidget {
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  void _login(BuildContext context, L10n l10n) {
+  Future<LoginDataResponse> _login(BuildContext context, L10n l10n) async{
     Validator validator = Validator();
+
     try{
-      if(validator.validateLoginFields(usernameController.text, passwordController.text, l10n)) {
-        _navigateToMainMenu(context);
+      validator.validateLoginFields(usernameController.text, passwordController.text, l10n);
+
+      final response = await http.post(
+        Uri.parse('http://192.168.0.171:8080/auth/login'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(<String, String>{
+          'username': usernameController.text,
+          'password': passwordController.text,
+        }),
+      );
+
+      switch(response.statusCode){
+        case 200:
+          LoginDataResponse loginResponse = LoginDataResponse.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+          jwtToken = loginResponse.accessToken;
+          userName = loginResponse.employeename;
+          _navigateToMainMenu(context);
+          return loginResponse;
+        case 401:
+          throw LoginFailedException(l10n.badCredentialExceptionMessage);
+        default:
+          throw LoginFailedException(l10n.defaultLoginExceptionMessage);
       }
-    } on LoginFieldIsEmptyException catch (e){
+    } on LoginFieldIsEmptyException catch (e) {
       _showAlertDialog(context, l10n, e.cause);
+      throw LoginFieldIsEmptyException(e.cause);
+    } on LoginFailedException catch (e) {
+      _showAlertDialog(context, l10n, e.cause);
+      throw LoginFailedException(e.cause);
     }
   }
 

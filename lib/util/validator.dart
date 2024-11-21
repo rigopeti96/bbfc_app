@@ -9,12 +9,10 @@ import '../exception/loginFieldIsEmptyException.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class Validator {
-  bool validateLoginFields(String username, String password, L10n l10n){
+  validateLoginFields(String username, String password, L10n l10n){
     if(username.isEmpty || password.isEmpty) {
       throw LoginFieldIsEmptyException(l10n.loginFieldIsEmptyExceptionMessage);
     }
-
-    return true;
   }
 
   bool validateSelectedDate(DateTime picked, L10n l10n){

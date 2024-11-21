@@ -31,6 +31,8 @@
   "selectedDateIsInvalidExceptionMessage": "A kiválasztott időpont nem lehet az aktuális dátumnál korábbi!",
   "selectedBirthDateIsInvalidExceptionMessage": "A kiválasztott születési dátum nem lehet az aktuális dátumnál későbbi!",
   "userNotFoundExceptionMessage": "A kiválasztott felhasználó nem található!",
+  "badCredentialExceptionMessage": "A felhasználónév vagy jelszó helytelen!",
+  "defaultLoginExceptionMessage": "Sikertelen bejelentkezési kísérlet!",
   "training": "Edzés",
   "trainingHistory": "Korábbi edzések",
   "trainingPlan": "Edzésterv",
