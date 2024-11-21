@@ -170,6 +170,11 @@
     "description": "Exception message to default login error",
     "context": "MainPage"
   },
+  "timeoutExceptionMessage": "Connect to server was not successful",
+  "@timeoutExceptionMessage": {
+    "description": "Exception message to timeout error",
+    "context": "MainPage"
+  },
   "training": "Training",
   "@training": {
     "description": "Training title",

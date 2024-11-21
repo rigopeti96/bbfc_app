@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:bbfc_application/entity/user.dart';
@@ -14,6 +15,7 @@ export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 String jwtToken = "";
 String userName = "";
+int timeout = 5;
 
 void main() {
   runApp(const MyApp());
@@ -72,12 +74,16 @@ class MyHomePage extends StatelessWidget {
         default:
           throw LoginFailedException(l10n.defaultLoginExceptionMessage);
       }
+
     } on LoginFieldIsEmptyException catch (e) {
       _showAlertDialog(context, l10n, e.cause);
       throw LoginFieldIsEmptyException(e.cause);
     } on LoginFailedException catch (e) {
       _showAlertDialog(context, l10n, e.cause);
       throw LoginFailedException(e.cause);
+    } on http.ClientException catch (e){
+      _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
+      throw LoginFailedException(l10n.timeoutExceptionMessage);
     }
   }
 

@@ -33,6 +33,7 @@
   "userNotFoundExceptionMessage": "A kiválasztott felhasználó nem található!",
   "badCredentialExceptionMessage": "A felhasználónév vagy jelszó helytelen!",
   "defaultLoginExceptionMessage": "Sikertelen bejelentkezési kísérlet!",
+  "timeoutExceptionMessage": "Időtúllépés, nem sikerült csatlakozni a kiszolgálóhoz",
   "training": "Edzés",
   "trainingHistory": "Korábbi edzések",
   "trainingPlan": "Edzésterv",
