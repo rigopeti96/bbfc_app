@@ -81,7 +81,7 @@ class MyHomePage extends StatelessWidget {
     } on LoginFailedException catch (e) {
       _showAlertDialog(context, l10n, e.cause);
       throw LoginFailedException(e.cause);
-    } on http.ClientException catch (e){
+    } on http.ClientException {
       _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
       throw LoginFailedException(l10n.timeoutExceptionMessage);
     }
