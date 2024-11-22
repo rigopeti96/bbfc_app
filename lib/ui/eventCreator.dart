@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:bbfc_application/entity/user.dart';
+import 'package:bbfc_application/exception/createEventException.dart';
 import 'package:bbfc_application/exception/selectedDateIsInvalidException.dart';
+import 'package:bbfc_application/main.dart';
 import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/historyList.dart';
 import 'package:bbfc_application/ui/injuryRegister.dart';
@@ -10,7 +14,7 @@ import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:http/http.dart' as http;
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 const List<String> eventTypeList = <String>['Training', 'Match', 'SportsMedicineExamination'];
@@ -64,6 +68,37 @@ class EventCreatorPageState extends State<EventCreatorPage>{
     }
 
     return "";
+  }
+
+  Future<bool> _createEvent(BuildContext context, L10n l10n, String endpoint) async{
+    try{
+      final response = await http.post(
+        Uri.parse('http://192.168.0.171:8080/$endpoint'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': jwtToken,
+        },
+        body: jsonEncode(<String, String>{
+
+        }),
+      );
+
+      switch(response.statusCode){
+        case 200:
+          return true;
+        case 401:
+          throw CreateEventException(l10n.badCredentialExceptionMessage);
+        default:
+          throw CreateEventException(l10n.defaultLoginExceptionMessage);
+      }
+
+    } on CreateEventException catch (e) {
+      _showAlertDialog(context, l10n, e.cause);
+      throw CreateEventException(e.cause);
+    } on http.ClientException {
+      _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
+      throw CreateEventException(l10n.timeoutExceptionMessage);
+    }
   }
 
   Future<void> _selectDate(BuildContext context, L10n l10n) async {

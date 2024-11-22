@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/exception/loginFailedException.dart';
-import 'package:bbfc_application/network/dao/logindataresponse.dart';
+import 'package:bbfc_application/network/dao/response/loginDataResponse.dart';
 import 'package:bbfc_application/ui/mainMenu.dart';
 import 'package:bbfc_application/exception/loginFieldIsEmptyException.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
