@@ -48,6 +48,7 @@ class EventCreatorPageState extends State<EventCreatorPage>{
   final pitchNameController = TextEditingController();
   final prizeController = TextEditingController();
   final durationController = TextEditingController();
+  final trainingPlanController = TextEditingController();
 
   String _getL10nValue(String label, L10n l10n){
     switch(label){
@@ -78,9 +79,9 @@ class EventCreatorPageState extends State<EventCreatorPage>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': jwtToken,
         },
-        body: jsonEncode(<String, String>{
-
-        }),
+        body: jsonEncode(
+            _createRequestMessage()
+        ),
       );
 
       switch(response.statusCode){
@@ -99,6 +100,35 @@ class EventCreatorPageState extends State<EventCreatorPage>{
       _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
       throw CreateEventException(l10n.timeoutExceptionMessage);
     }
+  }
+
+  Map <String, String> _createRequestMessage(){
+    Map <String, String> base = {
+      "eventDate": selectedDate.toString(),
+      "meetingTime": DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedDate.hour - 1, selectedDate.minute).toString(),
+      "eventLocationZipCode": "2030",
+      "eventLocationCity": "Érd",
+      "eventLocationAddress":"Kövirózsa utca 5/a",
+    };
+    switch(eventTypeValue){
+      case "Training":
+        base["duration"] = durationController.text;
+        base["trainingPlan"] = trainingPlanController.text;
+        break;
+      case "Match":
+        base["enemyTeam"] = enemyTeamController.text;
+        base["pitchName"] = pitchNameController.text;
+        base["selector"] = selectorValue;
+        base["matchType"] = matchTypeValue;
+        break;
+      case "SportsMedicineExamination":
+        base["prize"] = prizeController.text;
+        break;
+      default:
+        return <String, String>{};
+    }
+
+    return base;
   }
 
   Future<void> _selectDate(BuildContext context, L10n l10n) async {
