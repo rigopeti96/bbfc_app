@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/exception/createEventException.dart';
+import 'package:bbfc_application/exception/jwtTokenValidityException.dart';
 import 'package:bbfc_application/exception/selectedDateIsInvalidException.dart';
 import 'package:bbfc_application/main.dart';
 import 'package:bbfc_application/ui/eventList.dart';
@@ -72,9 +73,11 @@ class EventCreatorPageState extends State<EventCreatorPage>{
   }
 
   Future<bool> _createEvent(BuildContext context, L10n l10n, String endpoint) async{
+    String uri = 'http://192.168.0.171:8080$endpoint';
     try{
+      print(uri);
       final response = await http.post(
-        Uri.parse('http://192.168.0.171:8080/$endpoint'),
+        Uri.parse(uri),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': jwtToken,
@@ -85,10 +88,12 @@ class EventCreatorPageState extends State<EventCreatorPage>{
       );
 
       switch(response.statusCode){
-        case 200:
+        case 201:
           return true;
         case 401:
           throw CreateEventException(l10n.badCredentialExceptionMessage);
+        case 403:
+          throw JwtTokenValidityException(l10n.jwtTokenExceptionMessage);
         default:
           throw CreateEventException(l10n.defaultLoginExceptionMessage);
       }
@@ -96,9 +101,13 @@ class EventCreatorPageState extends State<EventCreatorPage>{
     } on CreateEventException catch (e) {
       _showAlertDialog(context, l10n, e.cause);
       throw CreateEventException(e.cause);
-    } on http.ClientException {
+    } on http.ClientException catch(e) {
+      print(e.message);
       _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
       throw CreateEventException(l10n.timeoutExceptionMessage);
+    } on JwtTokenValidityException {
+      _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
+      throw JwtTokenValidityException(l10n.jwtTokenExceptionMessage);
     }
   }
 
@@ -106,9 +115,9 @@ class EventCreatorPageState extends State<EventCreatorPage>{
     Map <String, String> base = {
       "eventDate": selectedDate.toString(),
       "meetingTime": DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedDate.hour - 1, selectedDate.minute).toString(),
-      "eventLocationZipCode": "2030",
-      "eventLocationCity": "Érd",
-      "eventLocationAddress":"Kövirózsa utca 5/a",
+      "eventLocationZipCode": zipController.text,
+      "eventLocationCity": addressCityController.text,
+      "eventLocationAddress": addressController.text,
     };
     switch(eventTypeValue){
       case "Training":
@@ -182,6 +191,19 @@ class EventCreatorPageState extends State<EventCreatorPage>{
     isTrainingSelected = value == "Training";
     isMatchSelected = value == "Match";
     isSportsMedicineExaminationSelected = value == "SportsMedicineExamination";
+  }
+
+  String _selectEndpoint(){
+    switch(eventTypeValue){
+      case "Training":
+        return "/trainings/create";
+      case "Match":
+        return "/matches/create";
+      case "SportsMedicineExamination":
+        return "/sportMedExam/create";
+      default:
+        return "";
+    }
   }
 
   @override
@@ -279,18 +301,31 @@ class EventCreatorPageState extends State<EventCreatorPage>{
             ),
             Visibility(
               visible: isTrainingSelected,
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  FilteringTextInputFormatter.digitsOnly
-                ],
-                controller: durationController,
-                decoration: InputDecoration(
-                  hintText: l10n.trainingDuration,
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-              ),
+              child:Column(
+                children: [
+                  TextField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.digitsOnly
+                    ],
+                    controller: durationController,
+                    decoration: InputDecoration(
+                      hintText: l10n.trainingDuration,
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
+                  TextField(
+                    maxLines: 8, //or null
+                    controller: trainingPlanController,
+                    decoration: InputDecoration(
+                      hintText: l10n.trainingPlanHint,
+                      filled: true,
+                      fillColor: Colors.white,
+                    ),
+                  ),
+                ]
+              )
             ),
             Visibility(
               visible: isMatchSelected,
@@ -379,6 +414,7 @@ class EventCreatorPageState extends State<EventCreatorPage>{
                 alignment: FractionalOffset.bottomCenter,
                 child: MaterialButton(
                   onPressed: (){
+                    _createEvent(context, l10n, _selectEndpoint());
                     Navigator.of(context).pop();
                   },
                   child: Text(l10n.createEventTitle),
