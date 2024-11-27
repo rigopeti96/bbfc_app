@@ -16,6 +16,7 @@ import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 const List<String> eventTypeList = <String>['Training', 'Match', 'SportsMedicineExamination'];
@@ -43,6 +44,8 @@ class EventCreatorPageState extends State<EventCreatorPage>{
   bool isSportsMedicineExaminationSelected = false;
   DateTime selectedDate = DateTime.now();
   final addressCityController = TextEditingController();
+  final _timePickerController = TextEditingController();
+  final _datePickerController = TextEditingController();
   final addressController = TextEditingController();
   final zipController = TextEditingController();
   final enemyTeamController = TextEditingController();
@@ -74,13 +77,18 @@ class EventCreatorPageState extends State<EventCreatorPage>{
 
   Future<bool> _createEvent(BuildContext context, L10n l10n, String endpoint) async{
     String uri = 'http://192.168.0.171:8080$endpoint';
+    var client = http.Client();
+    print(selectedDate.toString());
+    //var uri = Uri.https('192.168.0.171:8080', endpoint);
     try{
-      print(uri);
       final response = await http.post(
-        Uri.parse(uri),
+        Uri.http('192.168.0.171:8080', endpoint),
         headers: <String, String>{
+          "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+          "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+          "Access-Control-Allow-Methods": "POST, OPTIONS",
           'Content-Type': 'application/json; charset=UTF-8',
-          'Authorization': jwtToken,
+          'Authorization': "Bearer $jwtToken",
         },
         body: jsonEncode(
             _createRequestMessage()
@@ -112,9 +120,12 @@ class EventCreatorPageState extends State<EventCreatorPage>{
   }
 
   Map <String, String> _createRequestMessage(){
+    final f = DateFormat('yyyy-MM-ddTHH:mm:ss.SSS');
+
+
     Map <String, String> base = {
-      "eventDate": selectedDate.toString(),
-      "meetingTime": DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedDate.hour - 1, selectedDate.minute).toString(),
+      "eventDate": f.format(selectedDate).toString(),
+      "meetingTime": f.format(DateTime(selectedDate.year, selectedDate.month, selectedDate.day, selectedDate.hour - 1, selectedDate.minute)).toString(),
       "eventLocationZipCode": zipController.text,
       "eventLocationCity": addressCityController.text,
       "eventLocationAddress": addressController.text,
@@ -138,26 +149,6 @@ class EventCreatorPageState extends State<EventCreatorPage>{
     }
 
     return base;
-  }
-
-  Future<void> _selectDate(BuildContext context, L10n l10n) async {
-    final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
-        lastDate: DateTime(2101));
-
-    if (picked != null && picked != selectedDate) {
-      try{
-        if(validator.validateSelectedDate(picked, l10n)){
-          setState(() {
-            selectedDate = picked;
-          });
-        }
-      } on SelectedDateIsInvalidException catch(e){
-        _showAlertDialog(context, l10n, e.cause);
-      }
-    }
   }
 
   _showAlertDialog(BuildContext context, L10n l10n, String errorMessage) {
@@ -185,6 +176,30 @@ class EventCreatorPageState extends State<EventCreatorPage>{
         return alert;
       },
     );
+  }
+
+  dynamic datePickerDialog(BuildContext context) async {
+    var date = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1980),
+        lastDate: DateTime(2030));
+
+    if (date != null) {
+      setState(() {
+        _datePickerController.text = date.toString();
+      });
+    }
+  }
+
+  dynamic timePickerDialog(BuildContext context) async {
+    var time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
+
+    if (time != null) {
+      setState(() {
+        _timePickerController.text = time.format(context);
+      });
+    }
   }
 
   _setSelectionStateValues(String value){
@@ -240,15 +255,34 @@ class EventCreatorPageState extends State<EventCreatorPage>{
             ),
             Text(l10n.createEventDate),
             Text("${selectedDate.toLocal()}".split(' ')[0]),
-            const SizedBox(height: 20.0,),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size.fromHeight(40), // fromHeight use double.infinity as width and 40 is the height
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: _datePickerController,
+                decoration: const InputDecoration(
+                  hintText: "date",
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                readOnly: true,
+                onChanged: (val) {},
+                onTap: () => datePickerDialog(context),
               ),
-              onPressed: () => _selectDate(context, l10n),
-              child: Text(l10n.btnSelectDate),
             ),
-
+            Container(
+              margin: const EdgeInsets.only(top: 10),
+              child: TextField(
+                controller: _timePickerController,
+                decoration: const InputDecoration(
+                  hintText: "time",
+                  filled: true,
+                  fillColor: Colors.white,
+                ),
+                readOnly: true,
+                onChanged: (val) {},
+                onTap: () => timePickerDialog(context),
+              ),
+            ),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(l10n.createEventAddress),
