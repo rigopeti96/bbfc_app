@@ -76,10 +76,7 @@ class EventCreatorPageState extends State<EventCreatorPage>{
   }
 
   Future<bool> _createEvent(BuildContext context, L10n l10n, String endpoint) async{
-    String uri = 'http://192.168.0.171:8080$endpoint';
-    var client = http.Client();
     print(selectedDate.toString());
-    //var uri = Uri.https('192.168.0.171:8080', endpoint);
     try{
       final response = await http.post(
         Uri.http('192.168.0.171:8080', endpoint),
@@ -178,7 +175,7 @@ class EventCreatorPageState extends State<EventCreatorPage>{
     );
   }
 
-  dynamic datePickerDialog(BuildContext context) async {
+  dynamic _datePickerDialog(BuildContext context) async {
     var date = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
@@ -187,17 +184,17 @@ class EventCreatorPageState extends State<EventCreatorPage>{
 
     if (date != null) {
       setState(() {
-        _datePickerController.text = date.toString();
+        selectedDate = DateTime(date.year, date.month, date.day, selectedDate.hour, selectedDate.minute);
       });
     }
   }
 
-  dynamic timePickerDialog(BuildContext context) async {
+  dynamic _timePickerDialog(BuildContext context) async {
     var time = await showTimePicker(context: context, initialTime: TimeOfDay.now());
 
     if (time != null) {
       setState(() {
-        _timePickerController.text = time.format(context);
+        selectedDate = DateTime(selectedDate.year, selectedDate.month, selectedDate.day, time.hour, time.minute);
       });
     }
   }
@@ -255,7 +252,20 @@ class EventCreatorPageState extends State<EventCreatorPage>{
             ),
             Text(l10n.createEventDate),
             Text("${selectedDate.toLocal()}".split(' ')[0]),
-            Container(
+            MaterialButton(
+              onPressed: (){
+                _datePickerDialog(context);
+              },
+              child: Text(l10n.btnSelectDate),
+            ),
+            Text("${selectedDate.toLocal()}".split(' ')[1].split('.')[0]),
+            MaterialButton(
+              onPressed: (){
+                _timePickerDialog(context);
+              },
+              child: Text(l10n.btnSelectDate),
+            ),
+            /*Container(
               margin: const EdgeInsets.only(top: 10),
               child: TextField(
                 controller: _datePickerController,
@@ -266,10 +276,10 @@ class EventCreatorPageState extends State<EventCreatorPage>{
                 ),
                 readOnly: true,
                 onChanged: (val) {},
-                onTap: () => datePickerDialog(context),
+                onTap: () =>
               ),
-            ),
-            Container(
+            ),*/
+            /*Container(
               margin: const EdgeInsets.only(top: 10),
               child: TextField(
                 controller: _timePickerController,
@@ -280,9 +290,9 @@ class EventCreatorPageState extends State<EventCreatorPage>{
                 ),
                 readOnly: true,
                 onChanged: (val) {},
-                onTap: () => timePickerDialog(context),
+                onTap: () => _timePickerDialog(context),
               ),
-            ),
+            ),*/
             Align(
               alignment: Alignment.centerLeft,
               child: Text(l10n.createEventAddress),
