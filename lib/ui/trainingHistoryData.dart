@@ -75,6 +75,7 @@ class TrainingHistoryDataPageState extends State<TrainingHistoryDataPage>{
 
   @override
   Widget build(BuildContext context) {
+    planController.text = training.trainingPlan;
     final L10n l10n = L10n.of(context)!;
     return Scaffold(
       appBar: AppBar(title: Text(l10n.trainingPlan)),
@@ -109,6 +110,7 @@ class TrainingHistoryDataPageState extends State<TrainingHistoryDataPage>{
                       maxLines: 8, //or null
                       readOnly: _isPageReadOnly(),
                       decoration: InputDecoration.collapsed(hintText: l10n.trainingPlanHint),
+
                     ),
                   )
               )
