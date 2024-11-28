@@ -265,34 +265,6 @@ class EventCreatorPageState extends State<EventCreatorPage>{
               },
               child: Text(l10n.btnSelectDate),
             ),
-            /*Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: TextField(
-                controller: _datePickerController,
-                decoration: const InputDecoration(
-                  hintText: "date",
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                readOnly: true,
-                onChanged: (val) {},
-                onTap: () =>
-              ),
-            ),*/
-            /*Container(
-              margin: const EdgeInsets.only(top: 10),
-              child: TextField(
-                controller: _timePickerController,
-                decoration: const InputDecoration(
-                  hintText: "time",
-                  filled: true,
-                  fillColor: Colors.white,
-                ),
-                readOnly: true,
-                onChanged: (val) {},
-                onTap: () => _timePickerDialog(context),
-              ),
-            ),*/
             Align(
               alignment: Alignment.centerLeft,
               child: Text(l10n.createEventAddress),

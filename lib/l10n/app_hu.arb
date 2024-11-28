@@ -35,6 +35,7 @@
   "defaultLoginExceptionMessage": "Sikertelen bejelentkezési kísérlet!",
   "timeoutExceptionMessage": "Időtúllépés, nem sikerült csatlakozni a kiszolgálóhoz",
   "jwtTokenExceptionMessage": "A bejelentkezést igazoló token lejárt vagy érvénytelen",
+  "trainingNotFoundExceptionMessage": "Edzéslista nem található!",
   "training": "Edzés",
   "trainingHistory": "Korábbi edzések",
   "trainingPlan": "Edzésterv",
