@@ -185,6 +185,11 @@
     "description": "Exception message to TrainingNotFound error",
     "context": "Application"
   },
+  "createUserExceptionMessage": "Signup user was not successful",
+  "@createUserExceptionMessage": {
+    "description": "Exception message to CreateUserException error",
+    "context": "Application"
+  },
   "training": "Training",
   "@training": {
     "description": "Training title",
@@ -434,6 +439,11 @@
   "@newCertDateValues": {
     "description": "Separator title text",
     "context": "CertificateManagerPage"
+  },
+  "createUserSuccessful": "Create user was successful",
+  "@createUserSuccessful": {
+    "description": "Create user successful message",
+    "context": "UserHandlingPageState"
   },
   "btnSelectDate": "Select date",
   "@btnSelectDate": {

@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:bbfc_application/entity/rating.dart';
 import 'package:bbfc_application/entity/user.dart';
+import 'package:bbfc_application/exception/createUserException.dart';
 import 'package:bbfc_application/exception/selectedDateIsInvalidException.dart';
 import 'package:bbfc_application/exception/userNotFoundExcepiton.dart';
 import 'package:bbfc_application/ui/certificateManager.dart';
@@ -7,6 +10,7 @@ import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:toggle_switch/toggle_switch.dart';
+import 'package:http/http.dart' as http;
 
 import '../main.dart';
 
@@ -31,6 +35,7 @@ class UserHandlingPageState extends State<UserHandlingPage> {
   int _switchIndex = 0;
   DateTime selectedDate = DateTime.now();
   final nameController = TextEditingController();
+  final usernameController = TextEditingController();
   final birthPlaceController = TextEditingController();
   final addressCityController = TextEditingController();
   final addressController = TextEditingController();
@@ -122,11 +127,48 @@ class UserHandlingPageState extends State<UserHandlingPage> {
     );
   }
 
+  Map <String, String> _createRequestMessage() {
+    return {
+      "name": nameController.text,
+      "username": usernameController.text,
+      "password": "password123",
+      "email": usernameController.text,
+    };
+  }
+
+  Future<bool> _createUser(BuildContext context, L10n l10n) async{
+    try{
+      final response = await http.post(
+        Uri.parse('http://192.168.0.171:8080/auth/signup'),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonEncode(_createRequestMessage()),
+      );
+
+      if(response.statusCode == 201){
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(l10n.createUserSuccessful),
+        ));
+        return true;
+      } else {
+        throw CreateUserException(l10n.createUserExceptionMessage);
+      }
+
+    } on CreateUserException catch (e) {
+      _showAlertDialog(context, l10n, e.cause);
+      throw CreateUserException(e.cause);
+    } on http.ClientException {
+      _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
+      throw CreateUserException(l10n.timeoutExceptionMessage);
+    }
+  }
+
   Future<void> _selectDate(BuildContext context, L10n l10n) async {
     final DateTime? picked = await showDatePicker(
         context: context,
         initialDate: selectedDate,
-        firstDate: DateTime(2015, 8),
+        firstDate: DateTime(1970, 1),
         lastDate: DateTime(2101));
 
     if (picked != null && picked != selectedDate) {
@@ -148,6 +190,14 @@ class UserHandlingPageState extends State<UserHandlingPage> {
         builder: (context) => CertificateManagerPage(actUser: user, visitedUser: _findSelectedUser(l10n)),
       ),
     );
+  }
+
+  void _createOrUpdateUser(BuildContext context, L10n l10n){
+    if(_isNewPlayer()){
+      _createUser(context, l10n);
+    } else {
+      //TODO create updater function
+    }
   }
 
   @override
@@ -216,6 +266,17 @@ class UserHandlingPageState extends State<UserHandlingPage> {
                   controller: nameController,
                   decoration: InputDecoration(
                     hintText: l10n.fullNameTag,
+                    filled: true,
+                    fillColor: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(3), //apply padding to all four sides
+                child: TextField(
+                  controller: usernameController,
+                  decoration: InputDecoration(
+                    hintText: l10n.userNameTag,
                     filled: true,
                     fillColor: Colors.white,
                   ),
@@ -321,6 +382,17 @@ class UserHandlingPageState extends State<UserHandlingPage> {
                       child: Text(l10n.manageCertificate),
                     ),
                   )
+                ),
+              ),
+              Expanded(
+                child: Align(
+                  alignment: FractionalOffset.bottomCenter,
+                  child: MaterialButton(
+                    onPressed: (){
+                      _createOrUpdateUser(context, l10n);
+                    },
+                    child: Text(l10n.saveButtonText),
+                  ),
                 ),
               ),
             ],

@@ -36,6 +36,7 @@
   "timeoutExceptionMessage": "Időtúllépés, nem sikerült csatlakozni a kiszolgálóhoz",
   "jwtTokenExceptionMessage": "A bejelentkezést igazoló token lejárt vagy érvénytelen",
   "trainingNotFoundExceptionMessage": "Edzéslista nem található!",
+  "createUserExceptionMessage": "Felhasználó létrehozása sikertelen!",
   "training": "Edzés",
   "trainingHistory": "Korábbi edzések",
   "trainingPlan": "Edzésterv",
@@ -86,6 +87,7 @@
   "photoValidUntil": "Fotó érvényesség: ",
   "sportExamValidUntil": "Sportorvosi érvényesség: ",
   "freeExamSpaces": "Szabad pecséthelyek száma: ",
+  "createUserSuccessful": "Felhasználó létrehozása sikeres",
   "btnSelectDate": "Dátum választása",
   "btnSelectToday": "Mai nap",
   "newCertDateValues": "Változtatások"

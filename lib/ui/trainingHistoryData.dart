@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:bbfc_application/entity/training.dart';
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/permisson.dart';
+import 'package:bbfc_application/exception/jwtTokenValidityException.dart';
 import 'package:bbfc_application/exception/trainingFieldIsEmptyException.dart';
+import 'package:bbfc_application/exception/trainingNotFoundException.dart';
+import 'package:bbfc_application/exception/trainingRequestException.dart';
+import 'package:bbfc_application/main.dart';
+import 'package:bbfc_application/network/dao/response/trainingDataResponse.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:http/http.dart' as http;
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class TrainingHistoryDataPage extends StatefulWidget{
@@ -25,16 +32,43 @@ class TrainingHistoryDataPageState extends State<TrainingHistoryDataPage>{
   final planController = TextEditingController();
   TrainingHistoryDataPageState({required this.user, required this.training});
 
-  void _saveTraining(String plan, L10n l10n){
+  Future<TrainingDataResponse> _updateTrainingPlan(BuildContext context, L10n l10n) async{
     try{
-      if(validator.validateTrainingPlan(plan, l10n)){
-        training.trainingPlan = plan;
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(l10n.trainingPlanSaved),
-        ));
+      validator.validateTrainingPlan(planController.text, l10n);
+      final response = await http.put(
+          Uri.http('192.168.0.171:8080', "/trainings/updateTrainingPlan/${training.id}"),
+          headers: <String, String>{
+            "Access-Control-Allow-Origin": "*", // Required for CORS support to work
+            "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+            "Access-Control-Allow-Methods": "POST, OPTIONS",
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': "Bearer $jwtToken",
+          },
+        body: jsonEncode(<String, String>{
+          'trainingPlan': planController.text,
+        }),
+      );
+
+      switch(response.statusCode){
+        case 200:
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text(l10n.trainingPlanSaved),
+          ));
+          return TrainingDataResponse.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+        case 401:
+          throw TrainingNotFoundException(l10n.trainingNotFoundExceptionMessage);
+        case 403:
+          throw JwtTokenValidityException(l10n.jwtTokenExceptionMessage);
+        default:
+          throw TrainingNotFoundException(l10n.defaultLoginExceptionMessage);
       }
+
     } on TrainingFieldIsEmptyException catch(e){
       _showAlertDialog(context, l10n, e.cause);
+      throw TrainingFieldIsEmptyException(e.cause);
+    }  on http.ClientException {
+      _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
+      throw TrainingRequestException(l10n.timeoutExceptionMessage);
     }
   }
 
@@ -123,7 +157,7 @@ class TrainingHistoryDataPageState extends State<TrainingHistoryDataPage>{
                 ),
                 child: Text(l10n.saveButtonText),
                 onPressed: (){
-                  _saveTraining(planController.text, l10n);
+                  _updateTrainingPlan(context, l10n);
                 },
               ),
             ),
