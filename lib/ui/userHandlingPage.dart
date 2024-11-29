@@ -9,6 +9,7 @@ import 'package:bbfc_application/ui/certificateManager.dart';
 import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:bbfc_application/util/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import 'package:http/http.dart' as http;
 
@@ -127,12 +128,19 @@ class UserHandlingPageState extends State<UserHandlingPage> {
     );
   }
 
-  Map <String, String> _createRequestMessage() {
+  Map <String, dynamic> _createRequestMessage() {
+    final f = DateFormat('yyyy-MM-ddTHH:mm:ss.SSS');
+
     return {
       "name": nameController.text,
       "username": usernameController.text,
       "password": "password123",
       "email": usernameController.text,
+      "birthPlace": birthPlaceController.text,
+      "birthDate": f.format(selectedDate).toString(),
+      "addressZip": int.parse(zipController.text),
+      "addressCity": addressCityController.text,
+      "addressStreet": addressController.text
     };
   }
 

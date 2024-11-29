@@ -38,8 +38,6 @@ class EventCreatorPageState extends State<EventCreatorPage>{
   bool isSportsMedicineExaminationSelected = false;
   DateTime selectedDate = DateTime.now();
   final addressCityController = TextEditingController();
-  final _timePickerController = TextEditingController();
-  final _datePickerController = TextEditingController();
   final addressController = TextEditingController();
   final zipController = TextEditingController();
   final enemyTeamController = TextEditingController();
