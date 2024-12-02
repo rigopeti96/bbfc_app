@@ -77,6 +77,8 @@
   "numberOfGoals": "Gólok: ",
   "numberOfAssists": "Gólpasszok: ",
   "playerStatus": "Játékos státusza: ",
+  "playerStatusUpdated": "Játékos státusza frissítve",
+  "update": "Frissítés",
   "suspendedUntil": "Eltiltás határideje: ",
   "injuredUntil": "Várható felépülés: ",
   "available": "Játékra alkalmas",

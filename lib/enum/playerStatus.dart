@@ -1,3 +1,3 @@
-enum Status{
+enum PlayerStatus{
   AVAILABLE, SUSPENDED, INJURED
 }

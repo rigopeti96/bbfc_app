@@ -385,6 +385,16 @@
     "description": "Tag to show the status of the player",
     "context": "UserHandlingPage"
   },
+  "playerStatusUpdated": "Player's status updated",
+  "@playerStatusUpdated": {
+    "description": "Message when status is updated",
+    "context": "InjuryRegisterPageState"
+  },
+  "update": "Update",
+  "@update": {
+    "description": "Update button text",
+    "context": "Application"
+  },
   "suspendedUntil": "Suspended until: ",
   "@suspendedUntil": {
     "description": "Tag to show the deadline of suspended status",

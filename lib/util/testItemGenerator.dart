@@ -2,7 +2,7 @@ import 'package:bbfc_application/entity/certificate.dart';
 import 'package:bbfc_application/entity/rating.dart';
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/permisson.dart';
-import 'package:bbfc_application/enum/status.dart';
+import 'package:bbfc_application/enum/playerStatus.dart';
 import 'package:uuid/uuid.dart';
 
 class TestItemGenerator {
@@ -25,7 +25,7 @@ class TestItemGenerator {
         suspendedUntil: null,
         matchPlayed: 20,
         ratings: {},
-        playerStatus: Status.AVAILABLE
+        playerStatus: PlayerStatus.AVAILABLE
     );
 
     return user;
@@ -49,7 +49,7 @@ class TestItemGenerator {
         suspendedUntil: null,
         matchPlayed: 104,
         ratings: {},
-        playerStatus: Status.INJURED
+        playerStatus: PlayerStatus.INJURED
     );
 
     return user;
@@ -73,7 +73,7 @@ class TestItemGenerator {
         suspendedUntil: DateTime(2024, 10, 31),
         matchPlayed: 174,
         ratings: {},
-        playerStatus: Status.SUSPENDED
+        playerStatus: PlayerStatus.SUSPENDED
     );
 
     return user;
@@ -98,7 +98,7 @@ class TestItemGenerator {
         matchPlayed: 83,
         ratings: {},
         certificate: _createCertificate(),
-        playerStatus: Status.AVAILABLE
+        playerStatus: PlayerStatus.AVAILABLE
     );
 
     return user;

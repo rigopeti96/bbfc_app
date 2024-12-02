@@ -1,7 +1,7 @@
 import 'package:bbfc_application/entity/certificate.dart';
 import 'package:bbfc_application/entity/item.dart';
 import 'package:bbfc_application/entity/rating.dart';
-import 'package:bbfc_application/enum/status.dart';
+import 'package:bbfc_application/enum/playerStatus.dart';
 import 'package:uuid/uuid.dart';
 
 import '../enum/permisson.dart';
@@ -22,7 +22,7 @@ class User extends Item{
   DateTime? suspendedUntil;
   int matchPlayed = 0;
   Set<Rating> ratings;
-  Status playerStatus;
+  PlayerStatus playerStatus;
 
   User({
     super.id,
@@ -64,11 +64,11 @@ class User extends Item{
       suspendedUntil: json['suspendedUntil'] as DateTime,
       matchPlayed: json['matchPlayed'] as int,
       ratings: json['ratings'] as Set<Rating>,
-      playerStatus: json['playerStatus'] as Status,
+      playerStatus: json['playerStatus'] as PlayerStatus,
     );
   }
 
-  void changeStatus(Status newStatus, User modifyUser){
+  void changeStatus(PlayerStatus newStatus, User modifyUser){
     playerStatus = newStatus;
   }
 }
