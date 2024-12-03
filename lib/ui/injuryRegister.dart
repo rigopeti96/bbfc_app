@@ -49,7 +49,7 @@ class InjuryRegisterPageState extends State<InjuryRegisterPage>{
   Future<bool> _registerInjury(BuildContext context, L10n l10n) async{
     try{
       final response = await http.put(
-        Uri.parse('http://192.168.0.171:8080/status'),
+        Uri.parse('http://192.168.0.171:8080/users/status'),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'Authorization': "Bearer $jwtToken",
