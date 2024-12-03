@@ -40,7 +40,7 @@ class ProfileState extends State<Profile>{
             ),
             Padding(
               padding: const EdgeInsets.all(5), //apply padding to all four sides
-              child: Text("${l10n.emailTag}: rigopeti96@gmail.com"),
+              child: Text("${l10n.emailTag}: ${user.email}"),
             ),
             Expanded(
               child: Align(

@@ -368,13 +368,9 @@ class UserHandlingPageState extends State<UserHandlingPage> {
                     Text("${l10n.ratingTag}${_calculateUserRating(_findSelectedUser(l10n))}"),
                     Text("${l10n.playerStatus}${_stringifyEnumValue(l10n, _findSelectedUser(l10n).playerStatus.toString())}"),
                     Visibility(
-                      visible: _findSelectedUser(l10n).injuredUntil != null,
-                      child: Text("${l10n.injuredUntil}${_findSelectedUser(l10n).injuredUntil}"),
+                      visible: _findSelectedUser(l10n).outUntil != null,
+                      child: Text("${l10n.injuredUntil}${_findSelectedUser(l10n).outUntil}"),
                     ),
-                    Visibility(
-                      visible: _findSelectedUser(l10n).suspendedUntil != null,
-                      child: Text("${l10n.suspendedUntil}${_findSelectedUser(l10n).suspendedUntil}"),
-                    )
                   ],
                 ),
               ),

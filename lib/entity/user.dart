@@ -18,8 +18,7 @@ class User extends Item{
   Certificate? certificate;
   int goals;
   int assists;
-  DateTime? injuredUntil;
-  DateTime? suspendedUntil;
+  DateTime? outUntil;
   int matchPlayed = 0;
   Set<Rating> ratings;
   PlayerStatus playerStatus;
@@ -38,8 +37,7 @@ class User extends Item{
     this.certificate,
     required this.goals,
     required this.assists,
-    required this.injuredUntil,
-    required this.suspendedUntil,
+    this.outUntil,
     required this.matchPlayed,
     required this.ratings,
     required this.playerStatus,
@@ -60,8 +58,7 @@ class User extends Item{
       certificate: json['certificate'] as Certificate,
       goals: json['goals'] as int,
       assists: json['assists'] as int,
-      injuredUntil: json['injuredUntil'] as DateTime,
-      suspendedUntil: json['suspendedUntil'] as DateTime,
+      outUntil: json['outUntil'] as DateTime,
       matchPlayed: json['matchPlayed'] as int,
       ratings: json['ratings'] as Set<Rating>,
       playerStatus: json['playerStatus'] as PlayerStatus,

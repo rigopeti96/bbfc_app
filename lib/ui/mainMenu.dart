@@ -1,5 +1,10 @@
+import 'dart:convert';
+
 import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/permisson.dart';
+import 'package:bbfc_application/enum/playerStatus.dart';
+import 'package:bbfc_application/exception/userNotFoundExcepiton.dart';
+import 'package:bbfc_application/network/dao/response/userDataResponse.dart';
 import 'package:bbfc_application/ui/eventCreator.dart';
 import 'package:bbfc_application/ui/eventList.dart';
 import 'package:bbfc_application/ui/historyList.dart';
@@ -9,20 +14,106 @@ import 'package:bbfc_application/ui/seniority.dart';
 import 'package:bbfc_application/ui/settings.dart';
 import 'package:bbfc_application/ui/trainingHistoryList.dart';
 import 'package:bbfc_application/ui/userHandlingPage.dart';
-import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gen/gen_l10n/l10n.dart';
+import 'package:http/http.dart' as http;
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class MainMenu extends StatelessWidget {
-  final User actUser;
-  MainMenu({super.key, required this.actUser});
-  final TestItemGenerator generator = TestItemGenerator();
+  User? actUser;
+  MainMenu({super.key}) : super();
+
+  Future<bool> _getUserData(BuildContext context, L10n l10n) async {
+    try {
+      final response = await http.get(
+          Uri.parse('http://192.168.0.171:8080/users/me'),
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          }
+      );
+
+      switch (response.statusCode) {
+        case 200:
+          UserDataResponse loginResponse = UserDataResponse.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+          actUser = _convertResponseToEntity(loginResponse);
+          return true;
+        case 401:
+          throw UserNotFoundException(l10n.userNotFoundExceptionMessage);
+        default:
+          throw UserNotFoundException(l10n.defaultLoginExceptionMessage);
+      }
+    } on UserNotFoundException catch (e) {
+      _showAlertDialog(context, l10n, e.cause);
+      throw UserNotFoundException(e.cause);
+    } on http.ClientException {
+      _showAlertDialog(context, l10n, l10n.timeoutExceptionMessage);
+      throw UserNotFoundException(l10n.timeoutExceptionMessage);
+    }
+  }
+
+  User _convertResponseToEntity(UserDataResponse loginResponse){
+    return User(
+        modifyDate: loginResponse.modifyDate,
+        name: loginResponse.name,
+        phoneNumber: "0",
+        birthDay: loginResponse.birthDate,
+        birthPlace: loginResponse.birthPlace,
+        username: loginResponse.username,
+        password: loginResponse.password,
+        email: loginResponse.email,
+        roles: Permission.ADMIN,
+        goals: 0,
+        assists: 0,
+        outUntil: loginResponse.outUntil,
+        matchPlayed: 0,
+        ratings: Set(),
+        playerStatus: _convertStringToStatus(loginResponse.playerStatus)
+    );
+  }
+
+  PlayerStatus _convertStringToStatus(String playerStatus){
+    switch(playerStatus){
+      case "AVAILABLE":
+        return PlayerStatus.AVAILABLE;
+      case "INJURED":
+        return PlayerStatus.INJURED;
+      case "SUSPENDED":
+        return PlayerStatus.SUSPENDED;
+      default:
+        return PlayerStatus.AVAILABLE;
+    }
+  }
+
+  _showAlertDialog(BuildContext context, L10n l10n, String errorMessage) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text(l10n.back),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(l10n.errorTitle),
+      content: Text(errorMessage),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   void _navigateToProfile(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Profile(user: generator.createCreatorUser()),
+        builder: (context) => Profile(user: actUser!),
       ),
     );
   }
@@ -30,7 +121,7 @@ class MainMenu extends StatelessWidget {
   void _navigateToInjuryRegister(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => InjuryRegisterPage(actUser: actUser),
+        builder: (context) => InjuryRegisterPage(actUser: actUser!),
       ),
     );
   }
@@ -46,7 +137,7 @@ class MainMenu extends StatelessWidget {
   void _navigateToHistory(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => HistoryListPage(actUser: actUser),
+        builder: (context) => HistoryListPage(actUser: actUser!),
       ),
     );
   }
@@ -54,7 +145,7 @@ class MainMenu extends StatelessWidget {
   void _navigateToTrainingHistory(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => TrainingHistoryListPage(actUser: actUser),
+        builder: (context) => TrainingHistoryListPage(actUser: actUser!),
       ),
     );
   }
@@ -70,7 +161,7 @@ class MainMenu extends StatelessWidget {
   void _navigateToEventCreatorHub(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => EventCreatorPage(actUser: actUser),
+        builder: (context) => EventCreatorPage(actUser: actUser!),
       ),
     );
   }
@@ -78,7 +169,7 @@ class MainMenu extends StatelessWidget {
   void _navigateToUserHandlingPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => UserHandlingPage(actUser: actUser),
+        builder: (context) => UserHandlingPage(actUser: actUser!),
       ),
     );
   }
@@ -86,13 +177,13 @@ class MainMenu extends StatelessWidget {
   void _navigateToSeniorityPage(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => SeniorityPage(actUser: actUser),
+        builder: (context) => SeniorityPage(actUser: actUser!),
       ),
     );
   }
 
   bool _isPlayerPermission(){
-    if(actUser.roles == Permission.PLAYER){
+    if(actUser!.roles == Permission.PLAYER){
       return true;
     }
 
@@ -102,6 +193,7 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final L10n l10n = L10n.of(context)!;
+    _getUserData(context, l10n);
     return Scaffold(
       appBar: AppBar(title: Text("${l10n.shortTitle} - ${l10n.mainMenuTitle}"),),
         body: Center(

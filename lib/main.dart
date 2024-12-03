@@ -88,10 +88,9 @@ class MyHomePage extends StatelessWidget {
   }
 
   void _navigateToMainMenu(BuildContext context) {
-    User actUser = generator.createCreatorUser();
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => MainMenu(actUser: actUser),
+        builder: (context) => MainMenu(),
       ),
     );
   }
