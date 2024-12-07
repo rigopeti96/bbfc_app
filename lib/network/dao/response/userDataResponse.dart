@@ -1,22 +1,20 @@
 class UserDataResponse{
   final String id;
-  final DateTime modifyDate;
   final String name;
   final String username;
   final String email;
   final String password;
   final String birthPlace;
-  final DateTime birthDate;
+  final String birthDate;
   final int addressZip;
   final String addressCity;
   final String addressStreet;
   final String playerStatus;
   final bool enabled;
-  DateTime? outUntil;
+  String? outUntil;
 
   UserDataResponse({
     required this.id,
-    required this.modifyDate,
     required this.name,
     required this.username,
     required this.email,
@@ -34,19 +32,18 @@ class UserDataResponse{
   factory UserDataResponse.fromJson(Map<String, dynamic> json) {
     return UserDataResponse(
         id: json['id'] as String,
-        modifyDate: json['modifyDate'] as DateTime,
         name: json['name'] as String,
         username: json['username'] as String,
         email: json['email'] as String,
         password: json['password'] as String,
         birthPlace: json['birthPlace'] as String,
-        birthDate: json['birthDate'] as DateTime,
+        birthDate: json['birthDate'] as String,
         addressZip: json['addressZip'] as int,
         addressCity: json['addressCity'] as String,
         addressStreet: json['addressStreet'] as String,
         playerStatus: json['playerStatus'] as String,
         enabled: json['enabled'] as bool,
-        outUntil: json['outUntil'] as DateTime
+        outUntil: json['outUntil'] as String
     );
   }
 }

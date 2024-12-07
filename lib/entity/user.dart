@@ -15,6 +15,9 @@ class User extends Item{
   final String password;
   final String email;
   final Permission roles;
+  final int addressZip;
+  final String addressCity;
+  final String addressStreet;
   Certificate? certificate;
   int goals;
   int assists;
@@ -32,6 +35,9 @@ class User extends Item{
     required this.birthPlace,
     required this.username,
     required this.password,
+    required this.addressZip,
+    required this.addressCity,
+    required this.addressStreet,
     required this.email,
     required this.roles,
     this.certificate,
@@ -53,6 +59,9 @@ class User extends Item{
       birthPlace: json['birthPlace'] as String,
       username: json['username'] as String,
       password: json['password'] as String,
+      addressZip: json['addressZip'] as int,
+      addressCity: json['addressCity'] as String,
+      addressStreet: json['addressStreet'] as String,
       email: json['email'] as String,
       roles: json['roles'] as Permission,
       certificate: json['certificate'] as Certificate,

@@ -4,6 +4,7 @@ import 'package:bbfc_application/entity/user.dart';
 import 'package:bbfc_application/enum/permisson.dart';
 import 'package:bbfc_application/enum/playerStatus.dart';
 import 'package:bbfc_application/exception/userNotFoundExcepiton.dart';
+import 'package:bbfc_application/main.dart';
 import 'package:bbfc_application/network/dao/response/userDataResponse.dart';
 import 'package:bbfc_application/ui/eventCreator.dart';
 import 'package:bbfc_application/ui/eventList.dart';
@@ -14,13 +15,18 @@ import 'package:bbfc_application/ui/seniority.dart';
 import 'package:bbfc_application/ui/settings.dart';
 import 'package:bbfc_application/ui/trainingHistoryList.dart';
 import 'package:bbfc_application/ui/userHandlingPage.dart';
+import 'package:bbfc_application/util/testItemGenerator.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 export 'package:flutter_gen/gen_l10n/l10n.dart';
 
 class MainMenu extends StatelessWidget {
+  TestItemGenerator generator = TestItemGenerator();
   User? actUser;
-  MainMenu({super.key}) : super();
+
+  MainMenu({super.key}) : super() {
+    actUser = generator.createCreatorUser();
+  }
 
   Future<bool> _getUserData(BuildContext context, L10n l10n) async {
     try {
@@ -28,6 +34,7 @@ class MainMenu extends StatelessWidget {
           Uri.parse('http://192.168.0.171:8080/users/me'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
+            'Authorization': "Bearer $jwtToken",
           }
       );
 
@@ -52,22 +59,33 @@ class MainMenu extends StatelessWidget {
 
   User _convertResponseToEntity(UserDataResponse loginResponse){
     return User(
-        modifyDate: loginResponse.modifyDate,
+        modifyDate: DateTime.now(),
         name: loginResponse.name,
         phoneNumber: "0",
-        birthDay: loginResponse.birthDate,
+        birthDay: DateTime.parse(loginResponse.birthDate),
         birthPlace: loginResponse.birthPlace,
         username: loginResponse.username,
         password: loginResponse.password,
         email: loginResponse.email,
         roles: Permission.ADMIN,
+        addressZip: loginResponse.addressZip,
+        addressCity: loginResponse.addressCity,
+        addressStreet: loginResponse.addressStreet,
         goals: 0,
         assists: 0,
-        outUntil: loginResponse.outUntil,
+        outUntil: _paresOutUntil(loginResponse.outUntil),
         matchPlayed: 0,
         ratings: Set(),
         playerStatus: _convertStringToStatus(loginResponse.playerStatus)
     );
+  }
+
+  DateTime _paresOutUntil(String? outUntil){
+    if(outUntil == null){
+      return DateTime(0);
+    }
+
+    return DateTime.parse(outUntil);
   }
 
   PlayerStatus _convertStringToStatus(String playerStatus){
@@ -113,7 +131,7 @@ class MainMenu extends StatelessWidget {
   void _navigateToProfile(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
-        builder: (context) => Profile(user: actUser!),
+        builder: (context) => Profile(),
       ),
     );
   }
@@ -183,11 +201,17 @@ class MainMenu extends StatelessWidget {
   }
 
   bool _isPlayerPermission(){
-    if(actUser!.roles == Permission.PLAYER){
-      return true;
-    }
+    /*try{
+      if(actUser!.roles == Permission.PLAYER){
+        return true;
+      }
 
+      return false;
+    } on Exception {
+      return false;
+    }*/
     return false;
+
   }
 
   @override
